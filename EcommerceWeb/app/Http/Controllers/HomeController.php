@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Cart;
+use App\Models\Order;
 
 class HomeController extends Controller
 {
@@ -76,5 +77,71 @@ class HomeController extends Controller
             return redirect('login');
         }
     }
+
+    public function show_cart()
+    {
+        if(Auth::id())
+        {
+            $id = Auth::user()->id;
+
+            $cart = Cart::where('user_id', $id)->get();
+
+            return view('home.showcart', compact('cart'));
+        }
+        else
+        {
+            return redirect('login');
+        }
+
+    }
+
+    public function remove_cart($id)
+    {
+        $cart=cart::find($id);
+
+        $cart->delete();
+
+        return redirect()->back();
+    }
+
+    public function cash_order()
+    {
+        $user=Auth::user();
+
+        $userid=$user->id;
+
+        $data=cart::where('user_id','=',$userid)->get();
+
+        foreach($data as $data)
+        {
+            $order=new order;
+
+            $order->name=$data->name;
+            $order->email=$data->email;
+            $order->phone_number=$data->phone_number;
+            $order->address=$data->address;
+            $order->user_id=$data->user_id;
+
+            $order->product_name=$data->product_name;
+            $order->price=$data->price;
+            $order->quantity=$data->quantity;
+            $order->image=$data->image;
+            $order->product_id=$data->product_id;
+
+            $order->payment_status='cash on delivery';
+            $order->delivery_status='processing';
+
+            $order->save();
+
+            $cart_id=$data->id;
+            $cart=cart::find($cart_id);
+            $cart->delete();
+
+        }
+
+        return redirect()->back()->with('message','We Received Your Order. We Going to Contact you ASAP');
+
+    }
+
 
 }
