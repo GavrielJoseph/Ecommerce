@@ -68,6 +68,18 @@
          <!-- end slider section -->
 
       <!-- why section -->
+
+      @if(session()->has('message'))
+
+            <div class="alert alert-success">
+                
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+                
+                {{session()->get('message')}}
+
+            </div>
+
+            @endif
      
 
         <div class="center">
@@ -113,6 +125,12 @@
 
             <div>
                 <h1 class="total_design" >Total Price: Rp {{ $totalprice_formatted }}</h1>
+            </div>
+
+            <div>
+                <h1 style="font-size: 25px; padding-bottom: 15px;" >Order Here</h1>
+                <a href="{{url('cash_order')}}" class="btn btn-danger" >COD</a>
+                <a href="" class="btn btn-danger" >Pay Using Card</a>
             </div>
 
         </div>
