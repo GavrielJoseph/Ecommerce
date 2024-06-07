@@ -63,6 +63,7 @@
                 <th style="padding: 10px;">Delivery Status</th>
                 <th style="padding: 10px;">Image</th>
                 <th style="padding: 10px;">Delivered</th>
+                <th style="padding: 10px;">Print PDF</th>
 
             </tr>
 
@@ -93,6 +94,12 @@
                 <p style="color: green;">Delivered</p>
 
                 @endif
+
+                </td>
+
+                <td>
+
+                <a href="{{url('print',$order->id)}}" class="btn btn-secondary">Print</a>
 
                 </td>
 
