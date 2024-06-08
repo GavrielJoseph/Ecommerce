@@ -67,3 +67,5 @@ route::get('/email/{id}',[AdminController::class,'email']);
 
 route::post('/send_user_email/{id}',[AdminController::class,'send_user_email']);
 
+route::get('/search',[AdminController::class,'searchdata']);
+
