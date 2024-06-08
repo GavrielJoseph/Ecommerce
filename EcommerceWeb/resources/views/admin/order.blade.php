@@ -64,6 +64,7 @@
                 <th style="padding: 10px;">Image</th>
                 <th style="padding: 10px;">Delivered</th>
                 <th style="padding: 10px;">Print PDF</th>
+                <th style="padding: 10px;">Send Email</th>
 
             </tr>
 
@@ -103,6 +104,12 @@
 
                 </td>
 
+                <td>
+
+                <a href="{{url('email',$order->id)}}" class="btn btn-info">Send Email</a>
+
+                </td>
+
 
             </tr>
 
@@ -119,4 +126,3 @@
     <!-- End custom js for this page -->
   </body>
 </html>
-
