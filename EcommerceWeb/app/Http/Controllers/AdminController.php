@@ -5,13 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
-<<<<<<< Updated upstream
-=======
-use App\Models\Order;
-use PDF;
-use Notification;
-use App\Notifications\EmailNotification;
->>>>>>> Stashed changes
 
 class AdminController extends Controller
 {
@@ -118,68 +111,4 @@ class AdminController extends Controller
         return redirect()->back()->with('message','Product updated successfully');
     }
 
-<<<<<<< Updated upstream
-=======
-    public function order()
-    {
-        $order=order::all();
-
-
-        return view('admin.order',compact('order'));
-    }
-
-    public function delivered($id)
-    {
-
-
-        $order=order::find($id);
-
-        $order->delivery_status="delivered";
-
-        $order->payment_status="paid";
-
-        $order->save();
-
-        return redirect()->back();
-    }
-
-    public function print($id)
-    {
-        $order=order::find($id);
-
-        $pdf=PDF::loadView('admin.pdf',compact('order'));
-
-        return $pdf->download('order_details.pdf');
-    }
-
-    public function email($id)
-    {
-        $order=order::find($id);
-
-        return view('admin.email',compact('order'));
-    }
-
-    public function send_user_email(Request $request,$id)
-    {
-
-        $order=order::find($id);
-
-        $details=[
-
-            'greeting'=>$request->greeting,
-            'firstline'=>$request->firstline,
-            'body'=>$request->body,
-            'button'=>$request->button,
-            'url'=>$request->url,
-            'lastline'=>$request->lastline,
-
-        ];
-
-        notification::send($order,new EmailNotification($details));
-
-        return redirect()->back();
-
-    }
-
->>>>>>> Stashed changes
 }
