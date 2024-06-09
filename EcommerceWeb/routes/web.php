@@ -69,3 +69,7 @@ route::post('/send_user_email/{id}',[AdminController::class,'send_user_email']);
 
 route::get('/search',[AdminController::class,'searchdata']);
 
+route::get('/show_order',[HomeController::class,'show_order']);
+
+route::get('/cancel_order/{id}',[HomeController::class,'cancel_order']);
+
