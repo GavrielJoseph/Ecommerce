@@ -10,6 +10,7 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Comment;
 use App\Models\Reply;
+use App\Models\CommentLike;
 use Session;
 use Stripe;
 
@@ -302,6 +303,46 @@ class HomeController extends Controller
             return redirect('login');
         }
     }
+
+    public function likeComment(Request $request)
+    {
+        $commentId = $request->commentId;
+        $userId = Auth::id();
+
+        // Cek apakah pengguna sudah menyukai komentar ini
+        $existingLike = CommentLike::where('user_id', $userId)->where('comment_id', $commentId)->first();
+
+        if ($existingLike) {
+            return response()->json(['success' => false, 'message' => 'You have already liked this comment.']);
+        }
+
+        // Tambah entri like baru di tabel comment_likes
+        CommentLike::create([
+            'user_id' => $userId,
+            'comment_id' => $commentId,
+        ]);
+
+        // Tambah jumlah like di tabel comments
+        $comment = Comment::find($commentId);
+        if ($comment) {
+            $comment->likes += 1;
+            $comment->save();
+            return response()->json(['success' => true, 'likes' => $comment->likes]);
+        }
+
+        return response()->json(['success' => false]);
+    }
+    
+    
+    public function deleteComment(Request $request) {
+        $comment = Comment::find($request->commentId);
+        if ($comment && $comment->user_id == Auth::id()) {
+            $comment->delete();
+            return response()->json(['success' => true]);
+        }
+        return response()->json(['success' => false], 403);
+    }
+    
 
 
 }

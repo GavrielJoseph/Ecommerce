@@ -87,6 +87,11 @@
             border-radius: 5px;
             padding: 15px;
             margin-bottom: 15px;
+            position: relative;
+        }
+
+        .comment-content {
+            overflow: hidden;
         }
 
         .comment b {
@@ -98,17 +103,23 @@
             margin: 10px 0;
         }
 
-        .comment a {
-            color: #007bff;
-            text-decoration: none;
+        .comment-actions {
+            margin-top: 10px;
+            font-size: 0.9em;
         }
 
-        .comment a:hover {
+        .comment-actions a {
+            color: #007bff;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .comment-actions a:hover {
             text-decoration: underline;
         }
 
         .reply-section {
-            padding-left: 30px;
+            padding-left: 20px;
             margin-top: 10px;
             background: #f1f1f1;
             border-left: 2px solid #ced4da;
@@ -176,6 +187,30 @@
         .replyDiv .btn-close:hover {
             background-color: #d32f2f;
         }
+
+        .timestamp {
+            color: #777;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .load-more {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .load-more button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .load-more button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
@@ -216,33 +251,54 @@
             <h1>All comments</h1>
             @foreach($comment as $comment)
             <div class="comment">
-                <b>{{$comment->name}}</b>
-                <p>{{$comment->comment}}</p>
-                <a href="javascript:void(0);" onclick="reply(this)" data-Commentid="{{$comment->id}}">Reply</a>
+                <div class="comment-content">
+                    <b>{{$comment->name}}</b>
+                    <span class="timestamp">{{$comment->created_at->diffForHumans()}}</span>
+                    <p>{{$comment->comment}}</p>
+                    <div class="comment-actions">
+                        <a href="javascript:void(0);" onclick="reply(this)" data-Commentid="{{$comment->id}}">Reply</a>
+                        <a href="javascript:void(0);" onclick="likeComment(this)" data-id="{{$comment->id}}">Like</a> <span id="likes-{{$comment->id}}">{{$comment->likes}}</span>
+                        @if($comment->user_id == Auth::id())
+                        <a href="javascript:void(0);" onclick="deleteComment(this)" data-id="{{$comment->id}}">Delete</a>
+                        @endif
+                    </div>
+                </div>
 
                 @foreach($reply as $rep)
                 @if($rep->comment_id == $comment->id)
                 <div class="reply-section">
                     <b>{{$rep->name}}</b>
+                    <span class="timestamp">{{$rep->created_at->diffForHumans()}}</span>
                     <p>{{$rep->reply}}</p>
-                    <a href="javascript:void(0);" onclick="reply(this)" data-Commentid="{{$comment->id}}">Reply</a>
+                    <div class="comment-actions">
+                        <a href="javascript:void(0);" onclick="reply(this)" data-Commentid="{{$comment->id}}">Reply</a>
+                        <a href="javascript:void(0);">Like</a>
+                        @if($rep->user_id == Auth::id())
+                        <a href="javascript:void(0);">Delete</a>
+                        @endif
+                    </div>
                 </div>
                 @endif
                 @endforeach
             </div>
             @endforeach
 
-            <!-- Reply textbox -->
-            <div class="replyDiv">
-                <form action="{{url('add_reply')}}" method="POST">
-                    @csrf
-                    <input type="text" name="commentId" id="commentId" hidden>
-                    <textarea name="reply" placeholder="Write something here"></textarea>
-                    <br>
-                    <button type="submit" class="btn">Reply</button>
-                    <button type="button" class="btn btn-close" onclick="reply_close(this)">Close</button>
-                </form>
+            <!-- Load More Comments -->
+            <div class="load-more">
+                <button>Load More Comments</button>
             </div>
+        </div>
+
+        <!-- Reply Textbox -->
+        <div class="replyDiv">
+            <form action="{{url('add_reply')}}" method="POST">
+                @csrf
+                <input type="text" name="commentId" id="commentId" hidden="">
+                <textarea name="reply" placeholder="Write something here"></textarea>
+                <br>
+                <button type="submit" class="btn">Reply</button>
+                <a href="javascript:void(0);" class="btn btn-close" onClick="reply_close(this)">Close</a>
+            </form>
         </div>
     </div>
 
@@ -256,12 +312,12 @@
     @include('home.footer')
     <!-- footer end -->
     <div class="cpy_">
-        <p class="mx-auto">© 2021 All Rights Reserved By Kelompok<a href="https://html.design/">Free Html Templates</a><br>
+        <p class="mx-auto">© 2021 All Rights Reserved By <a href="https://html.design/">Free Html Templates</a><br>
             Distributed By <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
         </p>
     </div>
 
-    <script type="text/javascript">
+    <script>
         function reply(caller) {
             document.getElementById('commentId').value = $(caller).attr('data-Commentid');
             $('.replyDiv').insertAfter($(caller));
@@ -271,10 +327,59 @@
         function reply_close(caller) {
             $('.replyDiv').hide();
         }
+
+         function likeComment(caller) {
+         var commentId = $(caller).attr('data-id');
+         $.ajax({
+            url: "{{url('like_comment')}}",
+            type: 'POST',
+            data: {
+                  _token: '{{csrf_token()}}',
+                  commentId: commentId
+            },
+            success: function(response) {
+                  if(response.success) {
+                     // Update the like count in the UI
+                     var likesCount = $('#likes-' + commentId).text();
+                     likesCount = parseInt(likesCount) + 1;
+                     $('#likes-' + commentId).text(likesCount);
+                     alert('Comment liked');
+                  } else {
+                     alert(response.message || 'Failed to like comment');
+                  }
+            },
+            error: function(xhr, status, error) {
+                  console.error(xhr.responseText);
+                  alert('Error occurred: ' + error);
+            }
+         });
+      }
+
+
+
+        function deleteComment(caller) {
+            var commentId = $(caller).attr('data-id');
+            $.ajax({
+                url: "{{url('delete_comment')}}",
+                type: 'POST',
+                data: {
+                    _token: '{{csrf_token()}}',
+                    commentId: commentId
+                },
+                success: function(response) {
+                    if(response.success) {
+                        $(caller).closest('.comment').remove();
+                        alert('Comment deleted');
+                    } else {
+                        alert('Failed to delete comment');
+                    }
+                }
+            });
+        }
     </script>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function(event) {
+   <script>
+        document.addEventListener("DOMContentLoaded", function(event) { 
             var scrollpos = localStorage.getItem('scrollpos');
             if (scrollpos) window.scrollTo(0, scrollpos);
         });
