@@ -248,46 +248,50 @@
         </div>
 
         <div class="comments-section">
-            <h1>All comments</h1>
-            @foreach($comment as $comment)
-            <div class="comment">
-                <div class="comment-content">
-                    <b>{{$comment->name}}</b>
-                    <span class="timestamp">{{$comment->created_at->diffForHumans()}}</span>
-                    <p>{{$comment->comment}}</p>
-                    <div class="comment-actions">
-                        <a href="javascript:void(0);" onclick="reply(this)" data-Commentid="{{$comment->id}}">Reply</a>
-                        <a href="javascript:void(0);" onclick="likeComment(this)" data-id="{{$comment->id}}">Like</a> <span id="likes-{{$comment->id}}">{{$comment->likes}}</span>
-                        @if($comment->user_id == Auth::id())
-                        <a href="javascript:void(0);" onclick="deleteComment(this)" data-id="{{$comment->id}}">Delete</a>
-                        @endif
-                    </div>
+    <h1>All comments</h1>
+    <div id="comments-container">
+        @foreach($comment as $comment)
+        <div class="comment" data-id="{{$comment->id}}">
+            <div class="comment-content">
+                <b>{{$comment->name}}</b>
+                <span class="timestamp">{{$comment->created_at->diffForHumans()}}</span>
+                <p>{{$comment->comment}}</p>
+                <div class="comment-actions">
+                    <a href="javascript:void(0);" onclick="reply(this)" data-Commentid="{{$comment->id}}">Reply</a>
+                    <a href="javascript:void(0);" onclick="likeComment(this)" data-id="{{$comment->id}}">Like</a> 
+                    <span id="likes-{{$comment->id}}">{{$comment->likes}}</span>
+                    @if($comment->user_id == Auth::id())
+                    <a href="javascript:void(0);" onclick="deleteComment(this)" data-id="{{$comment->id}}">Delete</a>
+                    @endif
                 </div>
-
-                @foreach($reply as $rep)
-                @if($rep->comment_id == $comment->id)
-                <div class="reply-section">
-                    <b>{{$rep->name}}</b>
-                    <span class="timestamp">{{$rep->created_at->diffForHumans()}}</span>
-                    <p>{{$rep->reply}}</p>
-                    <div class="comment-actions">
-                        <a href="javascript:void(0);" onclick="reply(this)" data-Commentid="{{$comment->id}}">Reply</a>
-                        <a href="javascript:void(0);">Like</a>
-                        @if($rep->user_id == Auth::id())
-                        <a href="javascript:void(0);">Delete</a>
-                        @endif
-                    </div>
-                </div>
-                @endif
-                @endforeach
             </div>
+
+            @foreach($reply as $rep)
+            @if($rep->comment_id == $comment->id)
+            <div class="reply-section">
+                <b>{{$rep->name}}</b>
+                <span class="timestamp">{{$rep->created_at->diffForHumans()}}</span>
+                <p>{{$rep->reply}}</p>
+                <div class="comment-actions">
+                    <a href="javascript:void(0);" onclick="reply(this)" data-Commentid="{{$comment->id}}">Reply</a>
+                    <a href="javascript:void(0);">Like</a>
+                    @if($rep->user_id == Auth::id())
+                    <a href="javascript:void(0);">Delete</a>
+                    @endif
+                </div>
+            </div>
+            @endif
             @endforeach
-
-            <!-- Load More Comments -->
-            <div class="load-more">
-                <button>Load More Comments</button>
-            </div>
         </div>
+        @endforeach
+    </div>
+
+    <!-- Load More Comments -->
+    <div class="load-more">
+        <button id="prevBtn" style="display: none;" onclick="showPreviousComments()">Previous</button>
+        <button id="nextBtn" onclick="showNextComments()">Next</button>
+      </div>
+   </div>
 
         <!-- Reply Textbox -->
         <div class="replyDiv">
@@ -312,8 +316,7 @@
     @include('home.footer')
     <!-- footer end -->
     <div class="cpy_">
-        <p class="mx-auto">© 2021 All Rights Reserved By <a href="https://html.design/">Free Html Templates</a><br>
-            Distributed By <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
+        <p class="mx-auto">Kelompok 12 Backend <a href="https://html.design/"></a><br>
         </p>
     </div>
 
@@ -388,6 +391,45 @@
             localStorage.setItem('scrollpos', window.scrollY);
         };
     </script>
+
+   <script>
+      let currentIndex = 0;
+      const commentsPerPage = 3;
+      const comments = document.querySelectorAll('.comment');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+
+      function showComments() {
+         comments.forEach((comment, index) => {
+               if (index >= currentIndex && index < currentIndex + commentsPerPage) {
+                  comment.style.display = 'block';
+               } else {
+                  comment.style.display = 'none';
+               }
+         });
+         prevBtn.style.display = currentIndex === 0 ? 'none' : 'inline-block';
+         nextBtn.style.display = currentIndex + commentsPerPage >= comments.length ? 'none' : 'inline-block';
+      }
+
+      function showNextComments() {
+         if (currentIndex + commentsPerPage < comments.length) {
+               currentIndex += commentsPerPage;
+               showComments();
+         }
+      }
+
+      function showPreviousComments() {
+         if (currentIndex - commentsPerPage >= 0) {
+               currentIndex -= commentsPerPage;
+               showComments();
+         }
+      }
+
+      document.addEventListener('DOMContentLoaded', function() {
+         showComments();
+      });
+   </script>
+
 
     <!-- jQery -->
     <script src="home/js/jquery-3.4.1.min.js"></script>
