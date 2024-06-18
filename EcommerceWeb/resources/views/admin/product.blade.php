@@ -80,12 +80,12 @@
 
             <div class="div_design">
             <label>Product Price :</label>
-            <input class="text_color" type="number" name="price" placeholder="Write here" required="">
+            <input class="text_color" type="text" id="price" name="price" placeholder="Write here" required="">
             </div>
 
             <div class="div_design">
             <label>Discount Price :</label>
-            <input class="text_color" type="number" name="disc_price" placeholder="Write here">
+            <input class="text_color" type="text" id="disc_price" name="disc_price" placeholder="Write here">
             </div>
 
             <div class="div_design">
@@ -126,6 +126,19 @@
     <!-- plugins:js -->
     @include('admin.script')
     <!-- End custom js for this page -->
+    <script>
+      document.getElementById('price').addEventListener('input', function (e) {
+        this.value = formatNumber(this.value);
+      });
+
+      document.getElementById('disc_price').addEventListener('input', function (e) {
+        this.value = formatNumber(this.value);
+      });
+
+      function formatNumber(value) {
+        return value.replace(/\D/g, '')
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+      }
+    </script>
   </body>
 </html>
-
