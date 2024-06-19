@@ -80,5 +80,7 @@ route::post('/add_reply',[HomeController::class,'add_reply']);
 Route::post('like_comment', [HomeController::class, 'likeComment']);
 Route::post('delete_comment', [HomeController::class, 'deleteComment']);
 
+Route::get('search_product', [HomeController::class, 'search_product']);
+
 
 
