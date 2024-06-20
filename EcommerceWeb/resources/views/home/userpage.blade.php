@@ -24,13 +24,15 @@
     <style>
         /* Comment and Reply Styles */
         .discussion-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f8f9fa;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 80%; /* Menggunakan lebar 100% dari parent (biasanya body) */
+        margin: 0 auto; /* Tetapkan margin otomatis untuk tetap terpusat */
+        padding: 20px;
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: none; /* Pastikan tidak ada max-width yang menghalangi lebarnya */
         }
+
 
         .discussion-header {
             text-align: center;
@@ -211,6 +213,8 @@
         .load-more button:hover {
             background-color: #0056b3;
         }
+
+        
     </style>
 </head>
 <body>
@@ -221,7 +225,6 @@
         <!-- slider section -->
         @include('home.slider')
         <!-- end slider section -->
-    </div>
     <!-- why section -->
     @include('home.why')
     <!-- end why section -->

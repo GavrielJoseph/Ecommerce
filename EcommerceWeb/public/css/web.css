@@ -1,0 +1,79 @@
+.header_section {
+    background: black;
+    padding: 10px 0;
+}
+
+.navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 2px black;
+}
+
+.navbar-brand:hover {
+    color: #bdbdbd;
+}
+
+.navbar-nav .nav-item .nav-link {
+    color: white !important; /* Ensure text color is overridden */
+    margin: 0 10px;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    color: #bdbdbd;
+}
+
+.nav_search-btn {
+    color: white;
+}
+
+.nav_search-btn:hover {
+    color: #bdbdbd;
+}
+
+#logincss {
+    background-color: green; /* Background color for the login button */
+    border: none;
+    padding: 5px 15px;
+    margin-right: 10px;
+    color: white; /* Text color for the login button */
+}
+
+#logincss:hover {
+    background-color: #5a00d0; /* Hover background color */
+}
+
+.btn-success {
+    background-color: #4CAF50;
+    border: none;
+    padding: 5px 15px;
+    color: white; /* Ensure text color is white */
+}
+
+.btn-success:hover {
+    background-color: #45a049;
+}
+
+
+
+
+/* about us */
+.about_section {
+    padding: 50px 0;
+}
+
+.detail-box {
+    margin-right: 20px;
+}
+
+.image-box img {
+    max-width: 100%;
+    height: auto;
+    display: inline-block;
+}
+
+
+
