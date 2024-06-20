@@ -19,7 +19,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        $product=Product::paginate(12);
+        $product=Product::paginate(6);
         $comment=comment::orderby('id','desc')->get();
         $reply=reply::all();
         return view('home.userpage',compact('product','comment','reply'));
@@ -341,6 +341,19 @@ class HomeController extends Controller
             return response()->json(['success' => true]);
         }
         return response()->json(['success' => false], 403);
+    }
+
+    public function search_product(Request $request)
+    {
+        $comment=comment::orderby('id','desc')->get();
+        $reply=reply::all();
+
+        $search=$request->search;
+
+        $product=product::where('name', 'LIKE',"%$search%")->orWhere('category', 'LIKE',"$search")->paginate(10);
+
+        return view('home.userpage',compact('product','comment','reply'));
+
     }
     
 
