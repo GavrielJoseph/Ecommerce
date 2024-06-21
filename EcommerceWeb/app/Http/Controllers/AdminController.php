@@ -71,6 +71,8 @@ class AdminController extends Controller
     public function show_product()
     {
         $product=product::all();
+        $product = product::orderBy('category')->get();
+
         return view('admin.show_product',compact('product'));
     }
 
@@ -125,17 +127,27 @@ class AdminController extends Controller
 
     public function delivered($id)
     {
+        $order = Order::find($id);
 
+        if (!$order) {
+            return redirect()->back()->with('error', 'Order not found.');
+        }
 
-        $order=order::find($id);
+        // Ubah status delivery menjadi 'delivered' jika belum
+        if ($order->delivery_status != 'delivered') {
+            $order->delivery_status = 'delivered';
+            $order->payment_status = 'paid'; // Ubah juga status payment menjadi 'paid'
+            $order->save();
+        }
 
-        $order->delivery_status="delivered";
+        // Mengurangi quantity dari produk yang dipesan
+        $product = Product::where('name', $order->product_name)->first();
+        if ($product) {
+            $product->quantity -= $order->quantity;
+            $product->save();
+        }
 
-        $order->payment_status="paid";
-
-        $order->save();
-
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Order status updated to delivered.');
     }
 
     public function print($id)
@@ -186,5 +198,7 @@ class AdminController extends Controller
         return view ('admin.order',compact('order'));
 
     }
+
+    
 
 }

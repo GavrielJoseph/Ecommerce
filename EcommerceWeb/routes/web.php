@@ -82,5 +82,7 @@ Route::post('delete_comment', [HomeController::class, 'deleteComment']);
 
 Route::get('search_product', [HomeController::class, 'search_product']);
 
+Route::get('admin/delivered/{id}', [AdminController::class, 'delivered'])->name('admin.delivered');
+
 
 

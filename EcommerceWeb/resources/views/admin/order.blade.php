@@ -101,13 +101,10 @@
 
                 @if($order->delivery_status=='processing')
 
-                <a href="{{url('delivered',$order->id)}}" onclick="return confirm('Are you sure this product is delivered?')" class="btn btn-primary">Delivered</a>
-
-                @else
-
+                <a href="{{ route('admin.delivered', $order->id) }}" onclick="return confirm('Are you sure this product is delivered?')" class="btn btn-primary">Delivered</a>
+            @else
                 <p style="color: green;">Delivered</p>
-
-                @endif
+            @endif
 
                 </td>
 
