@@ -90,5 +90,5 @@ Route::get('sort', [AdminController::class, 'sortOrders'])->name('admin.sortOrde
 
 Route::get('sortByName', [AdminController::class, 'sortByName'])->name('admin.sortByName');
 
-
+Route::get('filter-by-delivery-status', [AdminController::class, 'filterByDeliveryStatus'])->name('admin.filterByDeliveryStatus');
 

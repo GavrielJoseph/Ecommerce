@@ -227,7 +227,30 @@ class AdminController extends Controller
         return view('admin.order', compact('order'));
     }
 
-    
+    public function filterByDeliveryStatus(Request $request)
+{
+    // Validasi request
+    $request->validate([
+        'delivery_status' => 'nullable|in:processing,delivered', // Nullable karena bisa kosong untuk menampilkan semua
+    ]);
+
+    // Ambil nilai dari form filter
+    $deliveryStatus = $request->input('delivery_status');
+
+    // Query untuk mengambil pesanan berdasarkan status pengiriman yang dipilih atau semua pesanan jika tidak ada filter
+    $query = Order::query();
+
+    if ($deliveryStatus) {
+        $query->where('delivery_status', $deliveryStatus);
+    }
+
+    // Ambil data pesanan
+    $order = $query->get();
+
+    // Load view kembali dengan data pesanan yang sudah difilter
+    return view('admin.order', compact('order'));
+}
+
     
 
 }

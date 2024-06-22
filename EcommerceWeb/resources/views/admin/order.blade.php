@@ -150,46 +150,55 @@
 </head>
 <body>
 <div class="container-scroller">
-    <!-- partial:partials/_sidebar.html -->
+    <!-- Sidebar and Header includes -->
     @include('admin.sidebar')
-    <!-- partial -->
     @include('admin.header')
-    <!-- partial -->
+
     <div class="main-panel">
         <div class="content-wrapper">
 
             <h1 class="title_design">All Orders</h1>
 
+            <!-- Search Form -->
             <div style="padding-left: 400px; padding-bottom: 30px;">
-
                 <form action="{{url('search')}}" method="get">
-
                     @csrf
-
                     <input type="text" style="color: black;" name="search" placeholder="Search Here">
-
                     <input type="submit" value="Search" class="btn btn-outline-primary">
                 </form>
-
             </div>
 
+            <!-- Sort by Delivery Status Button -->
             <div style="padding-left: 400px; padding-bottom: 30px;">
                 <form action="{{url('sort')}}" method="get">
                     <input type="submit" value="Sort by Delivery Status" class="btn btn-outline-primary">
                 </form>
             </div>
 
+            <!-- Sort by Name Button -->
             <div style="padding-left: 400px; padding-bottom: 30px;">
                 <form action="{{ route('admin.sortByName') }}" method="get">
                     <input type="submit" value="Sort by Name" class="btn btn-outline-primary">
                 </form>
             </div>
-            
-            
+
+            <div style="padding-left: 400px; padding-bottom: 30px;">
+                <form action="{{ route('admin.filterByDeliveryStatus') }}" method="get">
+                    <select name="delivery_status" class="btn btn-outline-primary">
+                        <option value="">Show All</option>
+                        <option value="processing">Processing</option>
+                        <option value="delivered">Delivered</option>
+                        <!-- Add more options if needed -->
+                    </select>
+                    <input type="submit" value="Apply" class="btn btn-outline-primary">
+                </form>
+            </div>
 
 
+            
+
+            <!-- Table of Orders -->
             <table class="table_design">
-
                 <tr class="th_design">
                     <th style="padding: 10px;">Name</th>
                     <th style="padding: 10px;">Email</th>
@@ -208,7 +217,6 @@
                 </tr>
 
                 @forelse($order as $order)
-
                     <tr>
                         <td>{{$order->name}}</td>
                         <td>{{$order->email}}</td>
@@ -220,7 +228,7 @@
                         <td>{{$order->payment_status}}</td>
                         <td>{{$order->delivery_status}}</td>
                         <td>
-                            <img class="image_size" src="/product/{{$order->image}}">
+                            <img class="img_size" src="/product/{{$order->image}}">
                         </td>
                         <td>
                             @if($order->delivery_status=='processing')
@@ -247,24 +255,17 @@
                             </form>
                         </td>
                     </tr>
-
                 @empty
-
                     <tr>
-                        <td colspan="16">
-                            No Data Found
-                        </td>
+                        <td colspan="14">No Data Found</td>
                     </tr>
-
                 @endforelse
-
             </table>
-
         </div>
     </div>
-    <!-- container-scroller -->
-    <!-- plugins:js -->
+    <!-- Includes for scripts -->
     @include('admin.script')
-    <!-- End custom js for this page -->
+</div>
+<!-- End container-scroller -->
 </body>
 </html>
