@@ -86,6 +86,9 @@ Route::get('admin/delivered/{id}', [AdminController::class, 'delivered'])->name(
 
 Route::delete('/deleteOrder/{id}', 'App\Http\Controllers\AdminController@deleteOrder')->name('admin.deleteOrder');
 
+Route::get('sort', [AdminController::class, 'sortOrders'])->name('admin.sortOrders');
+
+Route::get('sortByName', [AdminController::class, 'sortByName'])->name('admin.sortByName');
 
 
 

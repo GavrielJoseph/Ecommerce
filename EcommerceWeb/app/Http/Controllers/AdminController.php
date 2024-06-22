@@ -213,6 +213,21 @@ class AdminController extends Controller
 
     }
 
+    public function sortOrders(Request $request)
+    {
+
+        $order = Order::orderBy('delivery_status', 'desc')->get();
+        return view('admin.order', compact('order'));
+    }
+
+    public function sortByName()
+    {
+        $order = Order::orderBy('name')->get();
+
+        return view('admin.order', compact('order'));
+    }
+
+    
     
 
 }
