@@ -5,35 +5,149 @@
     @include('admin.css')
 
     <style type="text/css">
+  .center {
+  margin: auto;
+  width: 80%;
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 40px;
+  overflow-x: auto;
+}
 
-    .title_design
-    {
-        text-align: center;
-        font-size: 25px;
-        font-weight: bold;
-        padding-bottom: 40px;
+.font_size {
+  text-align: center;
+  font-size: 40px;
+  padding-top: 20px;
+  font-family: Arial, sans-serif;
+  color: #87CEEB;
+}
+
+.img_size {
+  width: 100px;
+  height: auto;
+  border-radius: 10px;
+}
+
+.th_color {
+  background: #87CEEB;
+  color: white;
+}
+
+.th_design {
+  padding: 10px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  border-right: 1px solid #ddd;
+}
+
+.th_design:last-child {
+  border-right: none;
+}
+
+.title_design {
+    text-align: center;
+    font-size: 40px;
+    padding-top: 20px;
+    font-family: Arial, sans-serif;
+    color: #87CEEB;
+    margin-bottom: 30px;
     }
 
-    .table_design
-    {
-        border: 2px solid white;
-        width: 100%;
-        margin: auto;
-        text-align: center;
-    }
+.table_design {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #333;
+  color: #f2f2f2;
+  border-radius: 10px;
+  overflow: hidden;
+  table-layout: fixed;
+}
 
-    .th_design
-    {
-        background-color: skyblue;
-    }
+th, td {
+  padding: 8px;
+  border-bottom: 1px solid #555;
+  border-right: 1px solid #555;
+  font-size: 14px; /* Smaller text size */
+  word-wrap: break-word;
+}
 
-    .image_size
-    {
-        width: 150px;
-        height: 100px;
-    }
+th:last-child, td:last-child {
+  border-right: none;
+}
 
-    </style>
+tr:hover {
+  background-color: #555;
+}
+
+.btn {
+  padding: 5px 10px; /* Smaller button size */
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  font-family: Arial, sans-serif;
+  font-size: 12px; /* Smaller button text size */
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-success {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.btn-danger {
+  background-color: #f44336;
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #45a049;
+}
+
+.btn-danger:hover {
+  background-color: #da190b;
+}
+
+.alert-success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.alert-success .close {
+  color: #155724;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .font_size {
+    font-size: 24px;
+  }
+
+  .th_design, th, td {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .img_size {
+    width: 80px;
+  }
+
+  .btn {
+    padding: 4px 8px; /* Smaller button size for mobile */
+    font-size: 10px; /* Smaller button text size for mobile */
+  }
+}
+
+</style>
+
 
   </head>
   <body>
@@ -78,6 +192,7 @@
                 <th style="padding: 10px;">Delivered</th>
                 <th style="padding: 10px;">Print PDF</th>
                 <th style="padding: 10px;">Send Email</th>
+                <th style="padding: 10px;">Delete Order</th>
 
             </tr>
 
@@ -119,6 +234,15 @@
                 <a href="{{url('email',$order->id)}}" class="btn btn-info">Send Email</a>
 
                 </td>
+
+                
+                <td>
+                <form action="{{ route('admin.deleteOrder', $order->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this order?')">Delete</button>
+                </form>
+            </td>
 
 
             </tr>

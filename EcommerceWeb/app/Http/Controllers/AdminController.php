@@ -27,7 +27,7 @@ class AdminController extends Controller
 
        $data->save();
 
-       return redirect()->back()->with('message','Items Added Successfully');
+       return redirect()->back()->with('message','Category Added Successfully');
     }
 
     public function delete_category($id)
@@ -84,6 +84,20 @@ class AdminController extends Controller
 
         return redirect()->back()->with('message','Product Deleted Successfully');
     }
+
+    public function deleteOrder($id)
+    {
+        $order = Order::find($id);
+
+        if (!$order) {
+            return redirect()->back()->with('error', 'Order not found.');
+        }
+
+        $order->delete();
+
+        return redirect()->back()->with('message', 'Order deleted successfully.');
+    }
+
 
     public function update_product($id)
     {
