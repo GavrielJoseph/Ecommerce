@@ -20,12 +20,12 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="{{url('/')}}">Home <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="{{url('product_display')}}">Products</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="contact.html">Contact</a>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
                         <a class="nav-link" href="{{url('show_cart')}}">Cart</a>
                     </li>

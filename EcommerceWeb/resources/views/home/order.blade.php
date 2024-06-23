@@ -11,7 +11,7 @@
       <meta name="description" content="" />
       <meta name="author" content="" />
       <link rel="shortcut icon" href="images/favicon.png" type="">
-      <title>Famms - Fashion HTML Template</title>
+      <title>GM</title>
       <!-- bootstrap core css -->
       <link rel="stylesheet" type="text/css" href="home/css/bootstrap.css" />
       <!-- font awesome style -->
@@ -21,145 +21,7 @@
       <!-- responsive style -->
       <link href="home/css/responsive.css" rel="stylesheet" />
 
-      <style type="text/css">
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-        }
-
-        .center {
-            margin: auto;
-            width: 70%;
-            padding: 30px;
-            text-align: center;
-            background: white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 30px;
-        }
-
-        th, td {
-            border: 1px solid #dee2e6;
-            padding: 15px;
-            text-align: left;
-        }
-
-        .th_design {
-            font-size: 18px;
-            padding: 10px;
-            background: #007bff;
-            color: white;
-            text-align: center;
-        }
-
-        .img_design {
-            height: 150px;
-            width: 150px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-
-        .btn {
-            display: inline-block;
-            font-weight: 400;
-            text-align: center;
-            white-space: nowrap;
-            vertical-align: middle;
-            user-select: none;
-            border: 1px solid transparent;
-            padding: 0.375rem 0.75rem;
-            font-size: 1rem;
-            line-height: 1.5;
-            border-radius: 0.25rem;
-            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-        }
-
-        .btn-danger {
-            color: #fff;
-            background-color: #dc3545;
-            border-color: #dc3545;
-        }
-
-        .btn-danger:hover {
-            color: #fff;
-            background-color: #c82333;
-            border-color: #bd2130;
-        }
-
-        .btn-danger:not(:disabled):not(.disabled):active {
-            color: #fff;
-            background-color: #bd2130;
-            border-color: #b21f2d;
-            box-shadow: none;
-        }
-
-        .btn-primary {
-            color: #fff;
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-
-        .btn-primary:hover {
-            color: #fff;
-            background-color: #0056b3;
-            border-color: #004085;
-        }
-
-        .btn-primary:not(:disabled):not(.disabled):active {
-            color: #fff;
-            background-color: #004085;
-            border-color: #003068;
-            box-shadow: none;
-        }
-
-        h1 {
-            margin: 20px 0;
-        }
-
-        .order-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .order-buttons a {
-            padding: 15px 25px;
-            font-size: 18px;
-            border-radius: 5px;
-            text-decoration: none;
-        }
-
-        .alert-success {
-            color: #155724;
-            background-color: #d4edda;
-            border-color: #c3e6cb;
-            padding: 20px;
-            margin-bottom: 20px;
-            border: 1px solid transparent;
-            border-radius: 0.25rem;
-        }
-
-        .close {
-            float: right;
-            font-size: 1.5rem;
-            font-weight: 700;
-            line-height: 1;
-            color: #000;
-            text-shadow: 0 1px 0 #fff;
-            opacity: .5;
-        }
-
-        .close:hover {
-            color: #000;
-            text-decoration: none;
-            opacity: .75;
-        }
-      </style>
+      
    </head>
    <body>
       <div class="hero_area">
