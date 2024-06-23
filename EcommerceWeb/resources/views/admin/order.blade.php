@@ -190,7 +190,7 @@
                         <option value="delivered">Delivered</option>
                         <!-- Add more options if needed -->
                     </select>
-                    <input type="submit" value="Apply" class="btn btn-outline-primary">
+                    <input type="submit" value="Filter" class="btn btn-outline-primary">
                 </form>
             </div>
 
