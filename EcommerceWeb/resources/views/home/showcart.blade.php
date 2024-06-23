@@ -22,41 +22,132 @@
       <link href="home/css/responsive.css" rel="stylesheet" />
 
       <style type="text/css">
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
 
-        .center
-        {
+        .center {
             margin: auto;
             width: 70%;
             text-align: center;
             padding: 30px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
         }
 
-        table,th,td
-        {
-            border: 1px solid grey;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
         }
 
-        .th_design
-        {
-            font-size: 30px;
-            padding: 5px;
-            background: skyblue;
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            text-align: left;
         }
 
-        .img_design
-        {
+        .th_design {
+            font-size: 18px;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            text-align: center;
+        }
+
+        .img_design {
             height: 150px;
             width: 150px;
+            object-fit: cover;
+            border-radius: 8px;
         }
 
-        .total_design
-        {
-            font-size: 20px;
-            padding: 40px;
+        .total_design {
+            font-size: 24px;
+            padding: 20px;
+            font-weight: bold;
+            color: #28a745;
         }
 
+        .btn {
+            display: inline-block;
+            font-weight: 400;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            user-select: none;
+            border: 1px solid transparent;
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: 0.25rem;
+            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+
+        .btn-danger {
+            color: #fff;
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .btn-danger:hover {
+            color: #fff;
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+
+        .btn-danger:not(:disabled):not(.disabled):active {
+            color: #fff;
+            background-color: #bd2130;
+            border-color: #b21f2d;
+            box-shadow: none;
+        }
+
+        h1 {
+            margin: 20px 0;
+        }
+
+        .order-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .order-buttons a {
+            padding: 15px 25px;
+            font-size: 18px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .alert-success {
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 0.25rem;
+        }
+
+        .close {
+            float: right;
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1;
+            color: #000;
+            text-shadow: 0 1px 0 #fff;
+            opacity: .5;
+        }
+
+        .close:hover {
+            color: #000;
+            text-decoration: none;
+            opacity: .75;
+        }
       </style>
-
    </head>
    <body>
       <div class="hero_area">
@@ -73,13 +164,13 @@
 
             <div class="alert alert-success">
                 
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                 
                 {{session()->get('message')}}
 
             </div>
 
-            @endif
+      @endif
      
 
         <div class="center">
@@ -93,7 +184,6 @@
                     <th class="th_design">Action</th>
                 </tr>
        
-
                 <?php $totalprice = 0; ?>
 
                 @foreach($cart as $cart)
@@ -124,26 +214,24 @@
             </table>
 
             <div>
-                <h1 class="total_design" >Total Price: Rp {{ $totalprice_formatted }}</h1>
+                <h1 class="total_design">Total Price: Rp {{ $totalprice_formatted }}</h1>
             </div>
 
             <div>
-                <h1 style="font-size: 25px; padding-bottom: 15px;" >Order Here</h1>
-                <a href="{{url('cash_order')}}" class="btn btn-danger" >COD/TRANSFER</a>
-                <a href="{{url('stripe',$totalprice)}}" class="btn btn-danger" >Pay Using Card</a>
+                <h1 style="font-size: 25px; padding-bottom: 15px;">Order Here</h1>
+                <div class="order-buttons">
+                    <a href="{{url('cash_order')}}" class="btn btn-danger">COD/TRANSFER</a>
+                    <a href="{{url('stripe',$totalprice)}}" class="btn btn-danger">Pay Using Card</a>
+                </div>
             </div>
 
         </div>
 
-
       <!-- footer start -->
-      
       <!-- footer end -->
       <div class="cpy_">
          <p class="mx-auto">© 2021 All Rights Reserved By Kelompok<a href="https://html.design/">Free Html Templates</a><br>
-         
             Distributed By <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
-         
          </p>
       </div>
       <!-- jQery -->
