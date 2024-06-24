@@ -13,7 +13,7 @@
    <meta name="description" content="" />
    <meta name="author" content="" />
    <link rel="shortcut icon" href="images/favicon.png" type="">
-   <title>Famms - Fashion HTML Template</title>
+   <title>GM</title>
    <!-- bootstrap core css -->
    <link rel="stylesheet" type="text/css" href="home/css/bootstrap.css" />
    <!-- font awesome style -->
@@ -25,9 +25,8 @@
 </head>
 <body>
    <div class="hero_area">
-      <!-- header section starts -->
+      <!-- Bagian header dimulai -->
       @include('home.header')
-      <!-- end header section -->
 
       <div class="col-sm-6 col-md-4 col-lg-4" style="margin: auto; width: 50%; padding: 30px">
          <div class="img-box" style="padding: 20px">
@@ -36,6 +35,7 @@
          <div class="detail-box">
             <h5>{{$product->name}}</h5>
 
+            <!-- Menampilkan harga dengan diskon jika ada -->
             @if($product->total_discount != null)
                <h6 style="color: red">Rp {{$product->total_discount}}</h6>
                <h6 style="text-decoration: line-through;">Rp {{$product->price}}</h6>
@@ -47,6 +47,7 @@
             <h6>Product Details: {{$product->description}}</h6>
             <h6>Stocks: {{$product->quantity}}</h6>
 
+            <!-- Form untuk menambahkan produk ke cart -->
             @if($product->quantity > 0)
                <form action="{{url('add_cart', $product->id)}}" method="Post">
                   @csrf
@@ -60,6 +61,7 @@
                   </div>
                </form>
             @else
+               <!-- Alert jika stock sudah habis -->
                <div class="alert alert-danger" role="alert">
                   This product is out of stock.
                </div>
@@ -69,15 +71,16 @@
       </div>
    </div>
 
-   <!-- footer start -->
+   <!-- Bagian footer dimulai -->
    @include('home.footer')
-   <!-- footer end -->
+
+
    <div class="cpy_">
-      <p class="mx-auto">© 2021 All Rights Reserved By Kelompok<a href="https://html.design/">Free Html Templates</a><br>
-         Distributed By <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
+      <p class="mx-auto">Kelompok 12 Backend<a href="https://html.design/"></a><br>
+         <a href="" target="_blank"></a>
       </p>
    </div>
-   <!-- jQery -->
+   <!-- jQuery -->
    <script src="home/js/jquery-3.4.1.min.js"></script>
    <!-- popper js -->
    <script src="home/js/popper.min.js"></script>
