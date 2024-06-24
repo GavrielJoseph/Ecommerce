@@ -213,12 +213,19 @@ class AdminController extends Controller
 
     }
 
-    public function sortOrders(Request $request)
+    public function sortOrders()
     {
+        // Custom sorting logic
+        $order = Order::orderByRaw("
+            CASE
+                WHEN delivery_status = 'processing' THEN 1
+                WHEN delivery_status = 'cancelled' THEN 2
+                ELSE 3
+            END, name ASC")->get();
 
-        $order = Order::orderBy('delivery_status', 'desc')->get();
         return view('admin.order', compact('order'));
     }
+
 
     public function sortByName()
     {
