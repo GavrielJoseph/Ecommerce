@@ -15,6 +15,7 @@
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
+          <!-- Menampilkan pesan jika ada -->
           @if(session()->has('message'))
             <div class="admin_show_product_alert-success">
               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
@@ -24,6 +25,7 @@
 
           <h2 class="admin_show_product_font_size">All Products</h2>
 
+           <!-- Tabel untuk menampilkan semua produk -->
           <table class="admin_show_product_center admin_show_product_table">
             <tr class="admin_show_product_th_color">
               <th class="admin_show_product_th_design">Product name</th>
@@ -37,6 +39,7 @@
               <th class="admin_show_product_th_design">Delete</th>
             </tr>
 
+            <!-- Menampilkan data produk dalam tabel -->
             @foreach($product as $product)
               <tr class="admin_show_product_tr">
                 <td class="admin_show_product_td">{{$product->name}}</td>

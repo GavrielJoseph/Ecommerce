@@ -4,7 +4,7 @@
     <title>Order PDF</title>
 </head>
 <body>
-
+    <!-- untuk isi pdf saat di download/print -->
     <h1>Order Details</h1>
 
     Customer name: <h3>{{$order->name}}</h3>

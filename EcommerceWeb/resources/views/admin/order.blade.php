@@ -18,7 +18,7 @@
 
             <h1 class="page-title">All Orders</h1>
 
-            <!-- Search Form -->
+            <!-- untuk search form -->
             <div class="search-form">
                 <form action="{{url('search')}}" method="get">
                     @csrf
@@ -27,34 +27,34 @@
                 </form>
             </div>
 
-            <!-- Sort by Delivery Status Button -->
+            <!-- button sort by delivery status -->
             <div class="search-form">
                 <form action="{{url('sort')}}" method="get">
                     <input type="submit" value="Sort by Delivery Status" class="sort-status-button">
                 </form>
             </div>
 
-            <!-- Sort by Name Button -->
+            <!-- button sort by name -->
             <div class="search-form">
                 <form action="{{ route('admin.sortByName') }}" method="get">
                     <input type="submit" value="Sort by Name" class="sort-name-button">
                 </form>
             </div>
 
-            <!-- Filter by Delivery Status -->
+            <!-- filter by delivery status -->
             <div class="search-form">
                 <form action="{{ route('admin.filterByDeliveryStatus') }}" method="get">
                     <select name="delivery_status" class="filter-select-field">
                         <option value="">Show All</option>
                         <option value="processing">Processing</option>
                         <option value="delivered">Delivered</option>
-                        <!-- Add more options if needed -->
+
                     </select>
                     <input type="submit" value="Filter" class="filter-button">
                 </form>
             </div>
 
-            <!-- Table of Orders -->
+            <!-- Table  -->
             <table class="order-table">
                 <tr class="header-bg">
                     <th class="header-cell">Name</th>
@@ -68,7 +68,7 @@
                     <th class="header-cell">Delivery Status</th>
                     <th class="header-cell">Image</th>
                     <th class="header-cell">Delivered</th>
-                    <th class="header-cell">Print PDF</th>
+                    <th class="header-cell">Download PDF</th>
                     <th class="header-cell">Send Email</th>
                     <th class="header-cell">Delete Order</th>
                 </tr>
