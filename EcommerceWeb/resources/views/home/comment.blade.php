@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
     <title>Discussion</title>
     <link rel="stylesheet" href="css/app.css">
 </head>
+
 <body>
     <section class="discussion-container">
         <div class="discussion-header">
@@ -33,7 +35,7 @@
                         <p>{{$comment->comment}}</p>
                         <div class="comment-actions">
                             <a href="javascript:void(0);" onclick="reply(this)" data-Commentid="{{$comment->id}}">Reply</a>
-                            <a href="javascript:void(0);" onclick="likeComment(this)" data-id="{{$comment->id}}">Like</a> 
+                            <a href="javascript:void(0);" onclick="likeComment(this)" data-id="{{$comment->id}}">Like</a>
                             <span id="likes-{{$comment->id}}">{{$comment->likes}}</span>
                             @if($comment->user_id == Auth::id())
                             <a href="javascript:void(0);" onclick="deleteComment(this)" data-id="{{$comment->id}}">Delete</a>
@@ -103,7 +105,7 @@
                     commentId: commentId
                 },
                 success: function(response) {
-                    if(response.success) {
+                    if (response.success) {
                         // Update the like count in the UI
                         var likesCount = $('#likes-' + commentId).text();
                         likesCount = parseInt(likesCount) + 1;
@@ -130,7 +132,7 @@
                     commentId: commentId
                 },
                 success: function(response) {
-                    if(response.success) {
+                    if (response.success) {
                         $(caller).closest('.comment').remove();
                         alert('Comment deleted');
                     } else {
@@ -142,7 +144,7 @@
     </script>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function(event) { 
+        document.addEventListener("DOMContentLoaded", function(event) {
             var scrollpos = localStorage.getItem('scrollpos');
             if (scrollpos) window.scrollTo(0, scrollpos);
         });
@@ -190,4 +192,5 @@
         });
     </script>
 </body>
+
 </html>
