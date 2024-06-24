@@ -88,10 +88,10 @@
                             <img class="product-image" src="/product/{{$order->image}}">
                         </td>
                         <td>
-                            @if($order->delivery_status=='processing')
+                            @if($order->delivery_status == 'processing')
                                 <a href="{{ route('admin.delivered', $order->id) }}"
-                                   onclick="return confirm('Are you sure this product is delivered?')"
-                                   class="action-button btn btn-success">Delivered</a>
+                                onclick="return confirm('Are you sure this product is delivered?')"
+                                class="action-button delivered-btn">Delivered</a>
                             @else
                                 <p style="color: green;">Delivered</p>
                             @endif
