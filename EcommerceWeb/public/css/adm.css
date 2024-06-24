@@ -1,0 +1,646 @@
+body {
+    background-color: #f4f4f4;
+    color: #333;
+    font-family: Arial, sans-serif;
+}
+
+.update_product_center {
+    text-align: center;
+    padding-top: 40px;
+}
+
+.update_product_font_size {
+    font-size: 40px;
+    padding-bottom: 40px;
+    color: #333;
+}
+
+.update_product_text_color {
+    color: #333;
+    padding-bottom: 20px;
+}
+
+.update_product_label {
+    display: inline-block;
+    width: 200px;
+    font-weight: bold;
+}
+
+.update_product_div_design {
+    padding-bottom: 15px;
+}
+
+.update_product_btn {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.update_product_btn_primary {
+    background-color: #007bff;
+}
+
+.update_product_btn_primary:hover {
+    background-color: #0056b3;
+}
+
+input[type="text"],
+input[type="number"],
+select,
+input[type="file"] {
+    width: calc(100% - 220px);
+    padding: 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.update_product_img {
+    border-radius: 8px;
+}
+
+/* show product css page */
+.admin_show_product_center {
+    margin: auto;
+    width: 80%;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 40px;
+    overflow-x: auto;
+}
+
+.admin_show_product_font_size {
+    text-align: center;
+    font-size: 40px;
+    padding-top: 20px;
+    font-family: Arial, sans-serif;
+    color: #87CEEB;
+}
+
+.admin_show_product_img_size {
+    width: 100px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.admin_show_product_th_color {
+    background: #87CEEB;
+    color: white;
+}
+
+.admin_show_product_th_design {
+    padding: 15px;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    border-right: 1px solid #ddd;
+}
+
+.admin_show_product_th_design:last-child {
+    border-right: none;
+}
+
+.admin_show_product_table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #333;
+    /* Tetapkan kembali background-color di sini */
+    color: #f2f2f2;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.admin_show_product_th,
+.admin_show_product_td {
+    padding: 12px;
+    border-bottom: 1px solid #555;
+    border-right: 1px solid #555;
+}
+
+.admin_show_product_th:last-child,
+.admin_show_product_td:last-child {
+    border-right: none;
+}
+
+.admin_show_product_tr:hover {
+    background-color: #555;
+}
+
+.admin_show_product_btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.admin_show_product_btn-success {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.admin_show_product_btn-danger {
+    background-color: #f44336;
+    color: white;
+}
+
+.admin_show_product_btn-success:hover {
+    background-color: #45a049;
+}
+
+.admin_show_product_btn-danger:hover {
+    background-color: #da190b;
+}
+
+.admin_show_product_alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.admin_show_product_alert-success .close {
+    color: #155724;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .admin_show_product_font_size {
+        font-size: 24px;
+    }
+
+    .admin_show_product_th_design,
+    .admin_show_product_th,
+    .admin_show_product_td {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .admin_show_product_img_size {
+        width: 80px;
+    }
+
+    .admin_show_product_btn {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+}
+
+/* product page css */
+body {
+    background-color: #f4f4f4;
+    color: #333;
+    font-family: Arial, sans-serif;
+}
+
+.product_div_center {
+    text-align: center;
+    padding-top: 40px;
+}
+
+.product_font_size {
+    font-size: 40px;
+    padding-bottom: 40px;
+    color: #333;
+}
+
+.product_text_color {
+    color: #333;
+    padding-bottom: 20px;
+}
+
+.product_label {
+    display: inline-block;
+    width: 200px;
+    font-weight: bold;
+}
+
+.product_div_design {
+    padding-bottom: 15px;
+}
+
+.product_btn {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.product_btn-primary {
+    background-color: #007bff;
+}
+
+.product_btn-primary:hover {
+    background-color: #0056b3;
+}
+
+input[type="text"],
+input[type="number"],
+select,
+input[type="file"] {
+    width: calc(100% - 220px);
+    padding: 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+img {
+    border-radius: 8px;
+}
+
+/* order page css */
+.order-container {
+    margin: auto;
+    width: 80%;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 40px;
+    overflow-x: auto;
+}
+
+.order-title {
+    text-align: center;
+    font-size: 40px;
+    padding-top: 20px;
+    font-family: Arial, sans-serif;
+    color: #87CEEB;
+}
+
+.product-image {
+    width: 100px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.header-bg {
+    background: #87CEEB;
+    color: white;
+}
+
+.header-cell {
+    padding: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    border-right: 1px solid #ddd;
+}
+
+.header-cell:last-child {
+    border-right: none;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 40px;
+    padding-top: 20px;
+    font-family: Arial, sans-serif;
+    color: #87CEEB;
+    margin-bottom: 30px;
+}
+
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #333;
+    color: #f2f2f2;
+    border-radius: 10px;
+    overflow: hidden;
+    table-layout: fixed;
+}
+
+.order-table th, .order-table td {
+    padding: 8px;
+    border-bottom: 1px solid #555;
+    border-right: 1px solid #555;
+    font-size: 14px;
+    word-wrap: break-word;
+}
+
+.order-table th:last-child, .order-table td:last-child {
+    border-right: none;
+}
+
+.order-table tr:hover {
+    background-color: #555;
+}
+
+.action-button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-success {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn-danger {
+    background-color: #f44336;
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #45a049;
+}
+
+.btn-danger:hover {
+    background-color: #da190b;
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-success .close {
+    color: #155724;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.search-form {
+    padding-left: 400px; 
+    padding-bottom: 30px;
+}
+
+.search-input {
+    color: black;
+}
+
+.search-button, .sort-status-button, .sort-name-button, .filter-button {
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-button:hover, .sort-status-button:hover, .sort-name-button:hover, .filter-button:hover {
+    background-color: #0056b3;
+}
+
+.filter-select {
+    background-color: #fff;
+    color: #333;
+    padding: 5px 10px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+@media (max-width: 768px) {
+    .order-title {
+        font-size: 24px;
+    }
+
+    .header-cell, .order-table th, .order-table td {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .product-image {
+        width: 80px;
+    }
+
+    .action-button {
+        padding: 4px 8px;
+        font-size: 10px;
+    }
+
+    .search-form {
+        padding-left: 20px; 
+        padding-bottom: 15px;
+    }
+}
+
+/* Tambahan variabel CSS untuk input field "Search Here" dan dropdown "Show All" */
+.search-input-field {
+    color: black;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.filter-select-field {
+    background-color: #fff;
+    color: #333;
+    padding: 5px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.filter-select-field:hover {
+    background-color: #e6e6e6;
+}
+
+/* email page css */
+.email-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.email-form-title {
+    text-align: center;
+    font-size: 25px;
+    font-family: Arial, sans-serif;
+    color: #87CEEB;
+    margin-bottom: 30px;
+}
+
+.email-form {
+    width: 50%;
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    color: #f2f2f2;
+}
+
+.email-form label {
+    display: block;
+    width: 100%;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #87CEEB;
+}
+
+.email-form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #555;
+    color: #fff;
+}
+
+.email-form input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 16px;
+    width: 100%;
+}
+
+.email-form input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+    .email-form {
+        width: 80%;
+    }
+}
+
+/* category page css */
+body {
+    background-color: #000; /* Background color hitam */
+    color: #fff; /* Warna teks putih */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  .div_center {
+    text-align: center;
+    padding-top: 40px;
+  }
+  
+  .h2_font {
+    font-size: 40px;
+    padding-bottom: 40px;
+  }
+  
+  .input_color {
+    color: #000; /* Warna teks input hitam */
+    padding: 8px 12px;
+    font-size: 16px;
+    border: 1px solid #fff; /* Border putih */
+    border-radius: 4px;
+    width: 300px;
+    margin-bottom: 12px;
+    background-color: #fff; /* Background input putih */
+  }
+
+  .category {
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    margin-top: 30px;
+    border: 3px solid #87CEEB; /* Change border color */
+    border-radius: 10px; /* Rounded corners for the table */
+    overflow: hidden; /* Hide overflow */
+    background-color: #000; /* Background color hitam untuk table */
+  }
+
+  .category table {
+    width: 100%; /* Make the table fill its container */
+    border-collapse: collapse; /* Collapse table borders */
+    background-color: #000; /* Background color hitam untuk table */
+  }
+
+  .category table td, .category table th {
+    padding: 12px; /* Padding inside table cells */
+    border: 1px solid #87CEEB; /* Border for table cells */
+    text-align: left; /* Align text left inside table cells */
+    color: #fff; /* Warna teks putih */
+  }
+
+  .category table th {
+    background-color: #87CEEB; /* Header background color */
+  }
+
+  .btn {
+    padding: 8px 16px; /* Padding for buttons */
+    border: none;
+    border-radius: 4px;
+    font-size: 16px; /* Font size for buttons */
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .btn-primary {
+    background-color: #007bff; /* Primary button color */
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+  }
+
+  .btn-danger {
+    background-color: #dc3545; /* Danger button color */
+    color: white;
+  }
+
+  .btn-danger:hover {
+    background-color: #c82333; /* Darker shade on hover */
+  }
+
+  .alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+  }
+
+  .alert-success .close {
+    color: #155724;
+    text-decoration: none;
+    cursor: pointer;
+  }
