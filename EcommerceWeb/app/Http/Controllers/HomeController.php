@@ -55,7 +55,7 @@ class HomeController extends Controller
         }
         else
         {
-            $product=Product::paginate(12);
+            $product=Product::paginate(6);
 
             $comment=comment::orderby('id','desc')->get();
 
@@ -235,32 +235,49 @@ class HomeController extends Controller
 
     public function show_order()
     {
-        if(Auth::id())
-        {
-            $user=Auth::user();
+        if (Auth::id()) {
+            $user = Auth::user();
+            $userid = $user->id;
 
-            $userid=$user->id;
+            $order = Order::where('user_id', '=', $userid)
+                        ->orderByRaw("CASE 
+                            WHEN delivery_status = 'processing' THEN 1 
+                            WHEN delivery_status = 'delivered' THEN 2 
+                            ELSE 3 
+                        END")
+                        ->get();
 
-            $order=order::where('user_id','=',$userid)->get();
-
-            return view('home.order',compact('order'));
-        }
-        else
-        {
+            return view('home.order', compact('order'));
+        } else {
             return redirect('login');
         }
-
     }
 
     public function cancel_order($id)
     {
         $order=order::find($id);
 
-        $order->delivery_status='You canceled the order';
+        $order->delivery_status='you canceled the order';
 
         $order->save();
 
         return redirect()->back();
+    }
+
+    public function delete_order($id)
+    {
+        $order = Order::find($id);
+
+        if ($order) {
+            if ($order->delivery_status == 'delivered' || $order->delivery_status == 'you canceled the order') {
+                $order->delete();
+                return redirect()->back()->with('message', 'Order deleted successfully.');
+            } else {
+                return redirect()->back()->with('message', 'Cannot delete order with current status.');
+            }
+        }
+
+        return redirect()->back()->with('message', 'Order Deleted Successfully.');
     }
 
     public function add_comment(Request $request)
@@ -350,7 +367,7 @@ class HomeController extends Controller
 
         $search=$request->search;
 
-        $product=product::where('name', 'LIKE',"%$search%")->orWhere('category', 'LIKE',"$search")->paginate(10);
+        $product=product::where('name', 'LIKE',"%$search%")->orWhere('category', 'LIKE',"$search")->paginate(6);
 
         return view('home.userpage',compact('product','comment','reply'));
 

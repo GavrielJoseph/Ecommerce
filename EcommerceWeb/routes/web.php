@@ -82,6 +82,8 @@ Route::post('delete_comment', [HomeController::class, 'deleteComment']);
 
 Route::get('search_product', [HomeController::class, 'search_product']);
 
+Route::get('delete_order/{id}', [HomeController::class, 'delete_order'])->name('delete_order');
+
 Route::get('admin/delivered/{id}', [AdminController::class, 'delivered'])->name('admin.delivered');
 
 Route::delete('/deleteOrder/{id}', 'App\Http\Controllers\AdminController@deleteOrder')->name('admin.deleteOrder');

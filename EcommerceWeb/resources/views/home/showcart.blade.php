@@ -11,7 +11,7 @@
       <meta name="description" content="" />
       <meta name="author" content="" />
       <link rel="shortcut icon" href="images/favicon.png" type="">
-      <title>Famms - Fashion HTML Template</title>
+      <title>GM</title>
       <!-- bootstrap core css -->
       <link rel="stylesheet" type="text/css" href="home/css/bootstrap.css" />
       <!-- font awesome style -->
@@ -21,42 +21,7 @@
       <!-- responsive style -->
       <link href="home/css/responsive.css" rel="stylesheet" />
 
-      <style type="text/css">
-
-        .center
-        {
-            margin: auto;
-            width: 70%;
-            text-align: center;
-            padding: 30px;
-        }
-
-        table,th,td
-        {
-            border: 1px solid grey;
-        }
-
-        .th_design
-        {
-            font-size: 30px;
-            padding: 5px;
-            background: skyblue;
-        }
-
-        .img_design
-        {
-            height: 150px;
-            width: 150px;
-        }
-
-        .total_design
-        {
-            font-size: 20px;
-            padding: 40px;
-        }
-
-      </style>
-
+      
    </head>
    <body>
       <div class="hero_area">
@@ -73,13 +38,13 @@
 
             <div class="alert alert-success">
                 
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                 
                 {{session()->get('message')}}
 
             </div>
 
-            @endif
+      @endif
      
 
         <div class="center">
@@ -93,7 +58,6 @@
                     <th class="th_design">Action</th>
                 </tr>
        
-
                 <?php $totalprice = 0; ?>
 
                 @foreach($cart as $cart)
@@ -124,26 +88,24 @@
             </table>
 
             <div>
-                <h1 class="total_design" >Total Price: Rp {{ $totalprice_formatted }}</h1>
+                <h1 class="total_design">Total Price: Rp {{ $totalprice_formatted }}</h1>
             </div>
 
             <div>
-                <h1 style="font-size: 25px; padding-bottom: 15px;" >Order Here</h1>
-                <a href="{{url('cash_order')}}" class="btn btn-danger" >COD/TRANSFER</a>
-                <a href="{{url('stripe',$totalprice)}}" class="btn btn-danger" >Pay Using Card</a>
+                <h1 style="font-size: 25px; padding-bottom: 15px;">Order Here</h1>
+                <div class="order-buttons">
+                    <a href="{{url('cash_order')}}" class="btn btn-danger">COD/TRANSFER</a>
+                    <a href="{{url('stripe',$totalprice)}}" class="btn btn-danger">Pay Using Card</a>
+                </div>
             </div>
 
         </div>
 
-
       <!-- footer start -->
-      
       <!-- footer end -->
       <div class="cpy_">
          <p class="mx-auto">© 2021 All Rights Reserved By Kelompok<a href="https://html.design/">Free Html Templates</a><br>
-         
             Distributed By <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
-         
          </p>
       </div>
       <!-- jQery -->
