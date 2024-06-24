@@ -82,5 +82,13 @@ Route::post('delete_comment', [HomeController::class, 'deleteComment']);
 
 Route::get('search_product', [HomeController::class, 'search_product']);
 
+Route::get('admin/delivered/{id}', [AdminController::class, 'delivered'])->name('admin.delivered');
 
+Route::delete('/deleteOrder/{id}', 'App\Http\Controllers\AdminController@deleteOrder')->name('admin.deleteOrder');
+
+Route::get('sort', [AdminController::class, 'sortOrders'])->name('admin.sortOrders');
+
+Route::get('sortByName', [AdminController::class, 'sortByName'])->name('admin.sortByName');
+
+Route::get('filter-by-delivery-status', [AdminController::class, 'filterByDeliveryStatus'])->name('admin.filterByDeliveryStatus');
 

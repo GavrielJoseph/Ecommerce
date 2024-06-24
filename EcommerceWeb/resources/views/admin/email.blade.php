@@ -37,34 +37,29 @@
                 @csrf
 
                 <div style="padding-left: 35%; padding-top: 30px;">
-                    <label>Email Greeting: </label>
+                    <label>Salam Pembuka Email: </label>
                     <input style="color: black;" type="text" name="greeting">
                 </div>
 
                 <div style="padding-left: 35%; padding-top: 30px;">
-                    <label>Email First Line: </label>
+                    <label>Baris Pertama Email: </label>
                     <input style="color: black;" type="text" name="firstline">
                 </div>
 
                 <div style="padding-left: 35%; padding-top: 30px;">
-                    <label>Email Body: </label>
+                    <label>Isi Email: </label>
                     <input style="color: black;" type="text" name="body">
                 </div>
 
-                <div style="padding-left: 35%; padding-top: 30px;">
-                    <label>Email Button name: </label>
-                    <input style="color: black;" type="text" name="button">
-                </div>
+                
+
+                
 
                 <div style="padding-left: 35%; padding-top: 30px;">
-                    <label>Email Url: </label>
-                    <input style="color: black;" type="text" name="url">
-                </div>
-
-                <div style="padding-left: 35%; padding-top: 30px;">
-                    <label>Email Last Line: </label>
+                    <label>Kalimat Penutup Email: </label>
                     <input style="color: black;" type="text" name="lastline">
                 </div>
+
                 
                 <div style="padding-left: 35%; padding-top: 30px;">
                     
