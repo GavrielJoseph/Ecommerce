@@ -19,118 +19,106 @@ class HomeController extends Controller
 
     public function index()
     {
-        $product=Product::paginate(6);
-        $comment=comment::orderby('id','desc')->get();
-        $reply=reply::all();
-        return view('home.userpage',compact('product','comment','reply'));
+        $product = Product::paginate(6);
+        $comment = comment::orderBy('created_at', 'desc')->get();
+        $reply = reply::all();
+        return view('home.userpage', compact('product', 'comment', 'reply'));
     }
 
     public function redirect()
     {
-        $usertype=Auth::user()->usertype;
-        if($usertype=='1')
-        {
-            $total_product=product::all()->count();
+        $usertype = Auth::user()->usertype;
+        if ($usertype == '1') {
+            $total_product = product::all()->count();
 
-            $total_order=order::all()->count();
+            $total_order = order::all()->count();
 
-            $total_user=user::all()->count();
+            $total_user = user::all()->count();
 
-            $order=order::all();
+            $order = order::all();
 
-            $total_revenue=0;
+            $total_revenue = 0;
 
-            foreach ($order as $order)
-            {
+            foreach ($order as $order) {
                 $total_revenue += (float) str_replace('.', '', $order->price);
             }
-    
+
             $total_revenue = number_format($total_revenue, 0, ',', '.');
 
-            $total_delivered=order::where('delivery_status','=','delivered')->get()->count();
+            $total_delivered = order::where('delivery_status', '=', 'delivered')->get()->count();
 
-            $total_processing=order::where('delivery_status','=','processing')->get()->count();
-            
-            return view('admin.home',compact('total_product','total_order','total_user','total_revenue','total_delivered','total_processing'));
-        }
-        else
-        {
-            $product=Product::paginate(6);
+            $total_processing = order::where('delivery_status', '=', 'processing')->get()->count();
 
-            $comment=comment::orderby('id','desc')->get();
+            return view('admin.home', compact('total_product', 'total_order', 'total_user', 'total_revenue', 'total_delivered', 'total_processing'));
+        } else {
+            $product = Product::paginate(6);
 
-            $reply=reply::all();
+            $comment = comment::orderBy('created_at', 'desc')->get();
 
-        return view('home.userpage',compact('product','comment','reply'));
+            $reply = reply::all();
+
+            return view('home.userpage', compact('product', 'comment', 'reply'));
         }
     }
 
     public function product_details($id)
     {
-        $product=product::find($id);
+        $product = product::find($id);
 
-        return view('home.product_details',compact('product'));
+        return view('home.product_details', compact('product'));
     }
 
-    public function add_cart(Request $request,$id)
+    public function add_cart(Request $request, $id)
     {
-        if(Auth::id())
-        {
-            $user=Auth::user();
+        if (Auth::id()) {
+            $user = Auth::user();
 
-            $product=product::find($id);
+            $product = product::find($id);
 
-            $cart=new cart;
+            $cart = new cart;
 
-            $cart->name=$user->name;
-            $cart->email=$user->email;
-            $cart->phone_number=$user->phone;
-            $cart->address=$user->address;
-            $cart->user_id=$user->id;
+            $cart->name = $user->name;
+            $cart->email = $user->email;
+            $cart->phone_number = $user->phone;
+            $cart->address = $user->address;
+            $cart->user_id = $user->id;
 
-            $cart->product_name=$product->name;
+            $cart->product_name = $product->name;
 
             $price = (float) str_replace('.', '', $product->total_discount ?? $product->price);
             $quantity = (int) $request->quantity;
             $cart->price = $price * $quantity;
             $cart->price = number_format($cart->price, 0, ',', '.');
 
-            $cart->image=$product->image;
-            $cart->product_id=$product->id;
+            $cart->image = $product->image;
+            $cart->product_id = $product->id;
 
-            $cart->quantity=$request->quantity;
+            $cart->quantity = $request->quantity;
 
             $cart->save();
 
             return redirect()->back();
-
-        }
-        else
-        {
+        } else {
             return redirect('login');
         }
     }
 
     public function show_cart()
     {
-        if(Auth::id())
-        {
+        if (Auth::id()) {
             $id = Auth::user()->id;
 
             $cart = Cart::where('user_id', $id)->get();
 
             return view('home.showcart', compact('cart'));
-        }
-        else
-        {
+        } else {
             return redirect('login');
         }
-
     }
 
     public function remove_cart($id)
     {
-        $cart=cart::find($id);
+        $cart = cart::find($id);
 
         $cart->delete();
 
@@ -139,97 +127,92 @@ class HomeController extends Controller
 
     public function cash_order()
     {
-        $user=Auth::user();
+        $user = Auth::user();
 
-        $userid=$user->id;
+        $userid = $user->id;
 
-        $data=cart::where('user_id','=',$userid)->get();
+        $data = cart::where('user_id', '=', $userid)->get();
 
-        foreach($data as $data)
-        {
-            $order=new order;
+        foreach ($data as $data) {
+            $order = new order;
 
-            $order->name=$data->name;
-            $order->email=$data->email;
-            $order->phone_number=$data->phone_number;
-            $order->address=$data->address;
-            $order->user_id=$data->user_id;
+            $order->name = $data->name;
+            $order->email = $data->email;
+            $order->phone_number = $data->phone_number;
+            $order->address = $data->address;
+            $order->user_id = $data->user_id;
 
-            $order->product_name=$data->product_name;
-            $order->price=$data->price;
-            $order->quantity=$data->quantity;
-            $order->image=$data->image;
-            $order->product_id=$data->product_id;
+            $order->product_name = $data->product_name;
+            $order->price = $data->price;
+            $order->quantity = $data->quantity;
+            $order->image = $data->image;
+            $order->product_id = $data->product_id;
 
-            $order->payment_status='COD/Transfer';
-            $order->delivery_status='processing';
+            $order->payment_status = 'COD/Transfer';
+            $order->delivery_status = 'processing';
 
             $order->save();
 
-            $cart_id=$data->id;
-            $cart=cart::find($cart_id);
+            $cart_id = $data->id;
+            $cart = cart::find($cart_id);
             $cart->delete();
-
         }
 
-        return redirect()->back()->with('message','We Received Your Order. We Going to Contact you ASAP');
-
+        return redirect()->back()->with('message', 'We Received Your Order. We Going to Contact you ASAP');
     }
 
     public function stripe($totalprice)
     {
 
 
-        return view('home.stripe',compact('totalprice'));
+        return view('home.stripe', compact('totalprice'));
     }
 
-    public function stripePost(Request $request,$totalprice)
+    public function stripePost(Request $request, $totalprice)
     {
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-    
-        Stripe\Charge::create ([
-                "amount" => $totalprice * 100,
-                "currency" => "idr",
-                "source" => $request->stripeToken,
-                "description" => "Thank for payment" 
+
+        Stripe\Charge::create([
+            "amount" => $totalprice * 100,
+            "currency" => "idr",
+            "source" => $request->stripeToken,
+            "description" => "Thank for payment"
         ]);
 
 
-        $user=Auth::user();
+        $user = Auth::user();
 
-        $userid=$user->id;
+        $userid = $user->id;
 
-        $data=cart::where('user_id','=',$userid)->get();
+        $data = cart::where('user_id', '=', $userid)->get();
 
-        foreach($data as $data)
-        {
-            $order=new order;
+        foreach ($data as $data) {
+            $order = new order;
 
-            $order->name=$data->name;
-            $order->email=$data->email;
-            $order->phone_number=$data->phone_number;
-            $order->address=$data->address;
-            $order->user_id=$data->user_id;
+            $order->name = $data->name;
+            $order->email = $data->email;
+            $order->phone_number = $data->phone_number;
+            $order->address = $data->address;
+            $order->user_id = $data->user_id;
 
-            $order->product_name=$data->product_name;
-            $order->price=$data->price;
-            $order->quantity=$data->quantity;
-            $order->image=$data->image;
-            $order->product_id=$data->product_id;
+            $order->product_name = $data->product_name;
+            $order->price = $data->price;
+            $order->quantity = $data->quantity;
+            $order->image = $data->image;
+            $order->product_id = $data->product_id;
 
-            $order->payment_status='Paid using card';
-            $order->delivery_status='processing';
+            $order->payment_status = 'Paid using card';
+            $order->delivery_status = 'processing';
 
             $order->save();
 
-            $cart_id=$data->id;
-            $cart=cart::find($cart_id);
+            $cart_id = $data->id;
+            $cart = cart::find($cart_id);
             $cart->delete();
-
         }
-      
+
         Session::flash('success', 'Payment successful!');
-              
+
         return back();
     }
 
@@ -240,12 +223,12 @@ class HomeController extends Controller
             $userid = $user->id;
 
             $order = Order::where('user_id', '=', $userid)
-                        ->orderByRaw("CASE 
+                ->orderByRaw("CASE 
                             WHEN delivery_status = 'processing' THEN 1 
                             WHEN delivery_status = 'delivered' THEN 2 
                             ELSE 3 
                         END")
-                        ->get();
+                ->get();
 
             return view('home.order', compact('order'));
         } else {
@@ -255,9 +238,9 @@ class HomeController extends Controller
 
     public function cancel_order($id)
     {
-        $order=order::find($id);
+        $order = order::find($id);
 
-        $order->delivery_status='you canceled the order';
+        $order->delivery_status = 'you canceled the order';
 
         $order->save();
 
@@ -282,41 +265,47 @@ class HomeController extends Controller
 
     public function add_comment(Request $request)
     {
-        if(Auth::id())
-        {
-            $comment=new comment;
+        if (Auth::id()) {
+            $user_id = Auth::user()->id;
+            $name = Auth::user()->name;
+            $comment_text = $request->comment;
 
-            $comment->name=Auth::user()->name;
-            $comment->user_id=Auth::user()->id;
-            $comment->comment=$request->comment;
+            // Generate a unique comment ID
+            do {
+                $comment_id = random_int(1, PHP_INT_MAX); // Generates a random integer within the range of valid PHP integer values
+            } while (Comment::find($comment_id) !== null);
 
+            // Create a new comment instance
+            $comment = new Comment;
+            $comment->id = $comment_id;
+            $comment->name = $name;
+            $comment->user_id = $user_id;
+            $comment->comment = $comment_text;
+
+            // Save the comment
             $comment->save();
 
             return redirect()->back();
-        }
-        else
-        {
+        } else {
             return redirect('login');
         }
     }
 
+
     public function add_reply(Request $request)
     {
-        if(Auth::id())
-        {
-            $reply=new reply;
+        if (Auth::id()) {
+            $reply = new reply;
 
-            $reply->name=Auth::user()->name;
-            $reply->user_id=Auth::user()->id;
-            $reply->comment_id=$request->commentId;
-            $reply->reply=$request->reply;
+            $reply->name = Auth::user()->name;
+            $reply->user_id = Auth::user()->id;
+            $reply->comment_id = $request->commentId;
+            $reply->reply = $request->reply;
 
             $reply->save();
 
             return redirect()->back();
-        }
-        else
-        {
+        } else {
             return redirect('login');
         }
     }
@@ -349,9 +338,10 @@ class HomeController extends Controller
 
         return response()->json(['success' => false]);
     }
-    
-    
-    public function deleteComment(Request $request) {
+
+
+    public function deleteComment(Request $request)
+    {
         $comment = Comment::find($request->commentId);
         if ($comment && $comment->user_id == Auth::id()) {
             $comment->delete();
@@ -362,17 +352,13 @@ class HomeController extends Controller
 
     public function search_product(Request $request)
     {
-        $comment=comment::orderby('id','desc')->get();
-        $reply=reply::all();
+        $comment = comment::orderby('id', 'desc')->get();
+        $reply = reply::all();
 
-        $search=$request->search;
+        $search = $request->search;
 
-        $product=product::where('name', 'LIKE',"%$search%")->orWhere('category', 'LIKE',"$search")->paginate(6);
+        $product = product::where('name', 'LIKE', "%$search%")->orWhere('category', 'LIKE', "$search")->paginate(6);
 
-        return view('home.userpage',compact('product','comment','reply'));
-
+        return view('home.userpage', compact('product', 'comment', 'reply'));
     }
-    
-
-
 }
