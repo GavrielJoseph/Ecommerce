@@ -269,6 +269,50 @@
 
 
 /* product css */
+:root {
+    --primary-color: #007bff; /* Warna utama */
+    --secondary-color: #6c757d; /* Warna sekunder */
+    --danger-color: #dc3545; /* Warna danger/alert */
+    --box-padding: 15px; /* Padding untuk kotak produk */
+    --box-margin-bottom: 30px; /* Margin bottom untuk kotak produk */
+    --border-radius: 5px; /* Border radius untuk elemen berbentuk kotak */
+ }
+
+ .product_section {
+    padding: 50px 0;
+ }
+ .box {
+    border: 1px solid #ccc;
+    padding: var(--box-padding);
+    margin-bottom: var(--box-margin-bottom);
+    border-radius: var(--border-radius);
+    height: 80%; 
+ }
+ .img-box img {
+    max-width: 100%;
+    height: auto;
+ }
+ .detail-box {
+    margin-top: 15px;
+ }
+ .pagination-button {
+    padding: 10px 20px;
+    border-radius: var(--border-radius);
+    border: none;
+    background-color: var(--primary-color);
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 0 5px;
+ }
+ .pagination-button:disabled {
+    background-color: var(--secondary-color);
+    cursor: not-allowed;
+ }
+ .pagination-button:hover:not(:disabled) {
+    background-color: var(--danger-color);
+ }
+ 
 
 /* order css */
 body {
@@ -403,7 +447,6 @@ h1 {
 }
 
 /* show cart page css */
-/* File: css/app.css */
 
 body {
     font-family: Arial, sans-serif;

@@ -32,10 +32,8 @@
         @include('home.slider')
         <!-- end slider section -->
     <!-- why section -->
-    <!-- @include('home.why') -->
     <!-- end why section -->
     <!-- arrival section -->
-    <!-- @include('home.newarrival') -->
     <!-- end arrival section -->
     <!-- product section -->
     @include('home.product')
@@ -49,7 +47,6 @@
     <!-- end subscribe section -->
     <br>
     <!-- client section -->
-    <!-- @include('home.client') -->
     <!-- end client section -->
     <!-- footer start -->
     @include('home.footer')

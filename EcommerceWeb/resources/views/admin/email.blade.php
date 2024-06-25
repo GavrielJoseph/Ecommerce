@@ -1,80 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
+<head>
+
     <base href="/public">
 
     @include('admin.css')
-
-    <style type="text/css">
-
-        label
-        {
-            display: inline-block;
-            width: 200px;
-            font-size: 15px;
-            font-weight: bold;
-        }
-
-    </style>
-
-  </head>
-  <body>
+    <link rel="stylesheet" href="css/adm.css">
+</head>
+<body>
     <div class="container-scroller">
-      <!-- partial:partials/_sidebar.html -->
-      @include('admin.sidebar')
-      <!-- partial -->
-      @include('admin.header')
+        @include('admin.sidebar')
+        <!-- partial -->
+        @include('admin.header')
         <!-- partial -->
         <div class="main-panel">
             <div class="content-wrapper">
-
-                <h1 style="text-align: center; font-size: 25px;">Send Email to {{$order->email}}</h1>
-
-
-                <form action="{{url('send_user_email',$order->id)}}" method="POST">
-
-                @csrf
-
-                <div style="padding-left: 35%; padding-top: 30px;">
-                    <label>Salam Pembuka Email: </label>
-                    <input style="color: black;" type="text" name="greeting">
+                <div class="email-form-container">
+                    <h1 class="email-form-title">Send Email to {{$order->email}}</h1>
+                    <!-- Form untuk mengirim email -->
+                    <form action="{{url('send_user_email',$order->id)}}" method="POST" class="email-form">
+                        @csrf
+                        <div>
+                            <label>Salam Pembuka Email:</label>
+                            <input type="text" name="greeting" required> <!-- Input untuk salam pembuka email -->
+                        </div>
+                        <div>
+                            <label>Baris Pertama Email:</label>
+                            <input type="text" name="firstline" required> <!-- Input untuk baris pertama email -->
+                        </div>
+                        <div>
+                            <label>Isi Email:</label>
+                            <input type="text" name="body" required> <!-- Input untuk isi email -->
+                        </div>
+                        <div>
+                            <label>Kalimat Penutup Email:</label>
+                            <input type="text" name="lastline" required> <!-- Input untuk kalimat penutup email -->
+                        </div>
+                        <div>
+                            <input type="submit" value="Send Email"> <!-- Tombol untuk mengirim email -->
+                        </div>
+                    </form>
                 </div>
-
-                <div style="padding-left: 35%; padding-top: 30px;">
-                    <label>Baris Pertama Email: </label>
-                    <input style="color: black;" type="text" name="firstline">
-                </div>
-
-                <div style="padding-left: 35%; padding-top: 30px;">
-                    <label>Isi Email: </label>
-                    <input style="color: black;" type="text" name="body">
-                </div>
-
-                
-
-                
-
-                <div style="padding-left: 35%; padding-top: 30px;">
-                    <label>Kalimat Penutup Email: </label>
-                    <input style="color: black;" type="text" name="lastline">
-                </div>
-
-                
-                <div style="padding-left: 35%; padding-top: 30px;">
-                    
-                    <input type="submit" value="Send Email" class="btn btn-primary">
-                </div>
-
-                </form>
-
-
             </div>
         </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
     @include('admin.script')
     <!-- End custom js for this page -->
-  </body>
+    </div>
+</body>
 </html>
-
