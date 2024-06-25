@@ -1,55 +1,42 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <!-- Basic -->
-      <meta charset="utf-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <!-- Mobile Metas -->
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-      <!-- Site Metas -->
-      <meta name="keywords" content="" />
-      <meta name="description" content="" />
-      <meta name="author" content="" />
-      <link rel="shortcut icon" href="images/favicon.png" type="">
-      <title>GM</title>
-      <!-- bootstrap core css -->
-      <link rel="stylesheet" type="text/css" href="home/css/bootstrap.css" />
-      <!-- font awesome style -->
-      <link href="home/css/font-awesome.min.css" rel="stylesheet" />
-      <!-- Custom styles for this template -->
-      <link href="home/css/style.css" rel="stylesheet" />
-      <!-- responsive style -->
-      <link href="home/css/responsive.css" rel="stylesheet" />
+<head>
+   <!-- Pengaturan dasar -->
+   <meta charset="utf-8" />
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <!-- Meta viewport untuk tampilan responsif -->
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+   <!-- Meta deskripsi dan kata kunci -->
+   <meta name="keywords" content="" />
+   <meta name="description" content="" />
+   <meta name="author" content="" />
+   <link rel="shortcut icon" href="images/favicon.png" type="">
+   <title>GM</title>
+   <!-- CSS Bootstrap -->
+   <link rel="stylesheet" type="text/css" href="home/css/bootstrap.css" />
+   <!-- Font Awesome untuk ikon -->
+   <link href="home/css/font-awesome.min.css" rel="stylesheet" />
+   <!-- Custom styles untuk template -->
+   <link href="home/css/style.css" rel="stylesheet" />
+   <!-- Style responsif -->
+   <link href="home/css/responsive.css" rel="stylesheet" />
+</head>
+<body>
+   <div class="hero_area">
+      <!-- Bagian header dimulai -->
+      @include('home.header')
 
-      
-   </head>
-   <body>
-      <div class="hero_area">
-         <!-- header section strats -->
-         @include('home.header')
-         <!-- end header section -->
-         <!-- slider section -->
-
-         <!-- end slider section -->
-
-      <!-- why section -->
-
+      <!-- Bagian untuk menampilkan pesan sukses jika ada -->
       @if(session()->has('message'))
-
-            <div class="alert alert-success">
-                
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                
-                {{session()->get('message')}}
-
-            </div>
-
+         <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            {{ session()->get('message') }}
+         </div>
       @endif
-     
 
-        <div class="center">
-
-            <table>
+      <div class="center">
+         <!-- Tabel untuk menampilkan daftar produk dalam keranjang -->
+         <table>
                 <tr>
                     <th class="th_design">Product name</th>
                     <th class="th_design">Product quantity</th>
@@ -58,63 +45,65 @@
                     <th class="th_design">Action</th>
                 </tr>
        
-                <?php $totalprice = 0; ?>
+            <?php $totalprice = 0; ?>
 
-                @foreach($cart as $cart)
+            @foreach($cart as $cart)
+               <tr>
+                  <td>{{$cart->product_name}}</td>
+                  <td>{{$cart->quantity}}</td>
+                  <td>Rp {{ number_format(floatval(str_replace('.', '', $cart->price)), 0, '.', '.') }}</td>
+                  <td><img class="img_design" src="/product/{{$cart->image}}"></td>
+                  <td>
+                     <!-- Tombol untuk menghapus produk dari keranjang -->
+                     <a class="btn btn-danger" onclick="return confirm('Are you sure?')" href="{{url('remove_cart',$cart->id)}}">Remove Product</a>
+                  </td>
+               </tr>
 
-                <tr>
-                    <td>{{$cart->product_name}}</td>
-                    <td>{{$cart->quantity}}</td>
-                    <td>Rp {{ number_format(floatval(str_replace('.', '', $cart->price)), 0, '.', '.') }}</td>
-                    <td><img class="img_design" src="/product/{{$cart->image}}"></td>
-                    <td>
-                        <a class="btn btn-danger" onclick="return confirm('Are you sure?')" href="{{url('remove_cart',$cart->id)}}">Remove Product</a>
-                    </td>
-                </tr>
+               <?php
+                  $itemPrice = floatval(str_replace('.', '', $cart->price));
+                  if ($itemPrice > 0) {
+                     $totalprice += $itemPrice;
+                  }
+               ?>
+            @endforeach
 
-                <?php
-                    $itemPrice = floatval(str_replace('.', '', $cart->price));
-                    if ($itemPrice > 0) {
-                        $totalprice += $itemPrice;
-                    }
-                ?>
+            <?php
+               // Format total harga dengan tanda pemisah ribuan
+               $totalprice_formatted = number_format($totalprice, 0, ',', '.');
+            ?>     
+         </table>
 
-                @endforeach
+         <!-- Menampilkan total harga keseluruhan -->
+         <div>
+            <h1 class="total_design">Total Harga: Rp {{ $totalprice_formatted }}</h1>
+         </div>
 
-                <?php
-                $totalprice_formatted = number_format($totalprice, 0, ',', '.');
-                ?>     
-
-            </table>
-
-            <div>
-                <h1 class="total_design">Total Price: Rp {{ $totalprice_formatted }}</h1>
+         <!-- Bagian untuk memesan produk -->
+         <div>
+            <h1 style="font-size: 25px; padding-bottom: 15px;">Order Here</h1>
+            <div class="order-buttons">
+               <!-- Tombol untuk membayar secara langsung atau transfer -->
+               <a href="{{url('cash_order')}}" class="btn btn-danger">COD/TRANSFER</a>
+               <!-- Tombol untuk membayar menggunakan kartu -->
+               <a href="{{url('stripe',$totalprice)}}" class="btn btn-danger">Pay Using Card</a>
             </div>
-
-            <div>
-                <h1 style="font-size: 25px; padding-bottom: 15px;">Order Here</h1>
-                <div class="order-buttons">
-                    <a href="{{url('cash_order')}}" class="btn btn-danger">COD/TRANSFER</a>
-                    <a href="{{url('stripe',$totalprice)}}" class="btn btn-danger">Pay Using Card</a>
-                </div>
-            </div>
-
-        </div>
-
-      <!-- footer start -->
-      <!-- footer end -->
-      <div class="cpy_">
-         <p class="mx-auto">© 2021 All Rights Reserved By Kelompok<a href="https://html.design/">Free Html Templates</a><br>
-            Distributed By <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
-         </p>
+         </div>
       </div>
-      <!-- jQery -->
-      <script src="home/js/jquery-3.4.1.min.js"></script>
-      <!-- popper js -->
-      <script src="home/js/popper.min.js"></script>
-      <!-- bootstrap js -->
-      <script src="home/js/bootstrap.js"></script>
-      <!-- custom js -->
-      <script src="home/js/custom.js"></script>
-   </body>
+
+      <br>
+   </div>
+
+   <!-- Bagian hak cipta -->
+   <div class="cpy_">
+      <p class="mx-auto">Kelompok 12 Backend<a href=""></a><br>
+        <a href="" target=""></a>
+      </p>
+   </div>
+
+   <!-- Script JavaScript -->
+   <script src="home/js/jquery-3.4.1.min.js"></script>
+   <script src="home/js/popper.min.js"></script>
+   <script src="home/js/bootstrap.js"></script>
+   <script src="home/js/custom.js"></script>
+</body>
 </html>

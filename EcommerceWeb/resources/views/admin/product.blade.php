@@ -17,12 +17,14 @@
     <!-- partial -->
     <div class="main-panel">
       <div class="content-wrapper">
+        <!-- Menampilkan pesan sukses jika ada -->
         @if(session()->has('message'))
         <div class="alert alert-success">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
           {{session()->get('message')}}
         </div>
         @endif
+        <!-- Formulir untuk menambahkan produk ke main page -->
         <div class="product_div_center">
           <h1 class="product_font_size">Add Product</h1>
           <form action="{{url('/add_product')}}" method="POST" enctype="multipart/form-data">
