@@ -295,7 +295,18 @@ class HomeController extends Controller
     public function add_reply(Request $request)
     {
         if (Auth::id()) {
+
+            $reply = new Reply;
+
+            // Generate a unique ID for the reply
+            do {
+                $reply_id = random_int(1, PHP_INT_MAX); // Generates a random integer within the range of valid PHP integer values
+            } while (Reply::find($reply_id) !== null);
+
+            $reply->id = $reply_id; // Assign the unique ID to the reply
+
             $reply = new reply;
+
 
             $reply->name = Auth::user()->name;
             $reply->user_id = Auth::user()->id;
@@ -309,6 +320,7 @@ class HomeController extends Controller
             return redirect('login');
         }
     }
+
 
     public function likeComment(Request $request)
     {
