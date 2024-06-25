@@ -21,14 +21,22 @@ class AdminController extends Controller
 
     public function add_category(Request $request)
     {
-       $data=new category; 
+        $data = new Category;
 
-       $data->category_name=$request->category;
+        // Generate a unique ID for the category
+        do {
+            $category_id = random_int(1, PHP_INT_MAX); // Generates a random integer within the range of valid PHP integer values
+        } while (Category::find($category_id) !== null);
 
-       $data->save();
+        $data->id = $category_id; // Assign the unique ID to the category
 
-       return redirect()->back()->with('message','Category Added Successfully');
+        $data->category_name = $request->category;
+
+        $data->save();
+
+        return redirect()->back()->with('message', 'Category Added Successfully');
     }
+
 
     public function delete_category($id)
     {
@@ -47,26 +55,34 @@ class AdminController extends Controller
 
     public function add_product(Request $request)
     {
-        $product=new product;
+        $product = new Product;
 
-        $product->name=$request->name;
-        $product->description=$request->description;
-        $product->price=$request->price;
-        $product->quantity=$request->quantity;
-        $product->total_discount=$request->disc_price;
-        $product->category=$request->category;
+        // Generate a unique ID for the product
+        do {
+            $product_id = random_int(1, PHP_INT_MAX); // Generates a random integer within the range of valid PHP integer values
+        } while (Product::find($product_id) !== null);
+
+        $product->id = $product_id; // Assign the unique ID to the product
+
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->quantity = $request->quantity;
+        $product->total_discount = $request->disc_price;
+        $product->category = $request->category;
 
         $image = $request->file('image');
-    if ($image) {
-        $imagename = time() . '.' . $image->getClientOriginalExtension();
-        $image->move('product', $imagename);
-        $product->image = $imagename;
-    }
+        if ($image) {
+            $imagename = time() . '.' . $image->getClientOriginalExtension();
+            $image->move('product', $imagename);
+            $product->image = $imagename;
+        }
 
         $product->save();
 
-        return redirect()->back()->with('message','Product Added Successfully');
+        return redirect()->back()->with('message', 'Product Added Successfully');
     }
+
 
     public function show_product()
     {
