@@ -72,10 +72,16 @@ class HomeController extends Controller
     {
         if (Auth::id()) {
             $user = Auth::user();
+            $product = Product::find($id);
 
-            $product = product::find($id);
+            $cart = new Cart;
 
-            $cart = new cart;
+            // Generate a unique ID for the cart
+            do {
+                $cart_id = random_int(1, PHP_INT_MAX); // Generates a random integer within the range of valid PHP integer values
+            } while (Cart::find($cart_id) !== null);
+
+            $cart->id = $cart_id; // Assign the unique ID to the cart
 
             $cart->name = $user->name;
             $cart->email = $user->email;
@@ -92,7 +98,6 @@ class HomeController extends Controller
 
             $cart->image = $product->image;
             $cart->product_id = $product->id;
-
             $cart->quantity = $request->quantity;
 
             $cart->save();
@@ -102,6 +107,7 @@ class HomeController extends Controller
             return redirect('login');
         }
     }
+
 
     public function show_cart()
     {
