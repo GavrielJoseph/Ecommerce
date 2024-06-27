@@ -95,7 +95,7 @@
 
    <!-- Bagian hak cipta -->
    <div class="cpy_">
-      <p class="mx-auto">Kelompok 12 Backend<a href=""></a><br>
+      <p class="mx-auto">© 2024 Kelompok 12<a href=""></a><br>
         <a href="" target=""></a>
       </p>
    </div>

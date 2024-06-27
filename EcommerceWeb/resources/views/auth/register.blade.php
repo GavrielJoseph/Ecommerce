@@ -9,12 +9,15 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <!-- logo gilgal makmur -->
+    <link rel="icon" type="image/png" href="{{ asset('admin/assets/images/GM.png') }}">
 </head>
 <body>
     <x-guest-layout>
         <x-authentication-card>
             <x-slot name="logo">
-                <x-authentication-card-logo />
+                <img src="{{ asset('admin/assets/images/GM.png') }}" class="h-20 w-auto" alt="Logo GM">
             </x-slot>
 
             <x-validation-errors class="mb-4" />

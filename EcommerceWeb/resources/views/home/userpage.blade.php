@@ -52,7 +52,7 @@
     @include('home.footer')
     <!-- footer end -->
     <div class="cpy_">
-        <p class="mx-auto">Kelompok 12 Backend <a href="https://html.design/"></a><br>
+        <p class="mx-auto">© 2024 Kelompok 12<a href="https://html.design/"></a><br>
         </p>
     </div>
 
