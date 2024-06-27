@@ -134,13 +134,19 @@ class HomeController extends Controller
     public function cash_order()
     {
         $user = Auth::user();
-
         $userid = $user->id;
 
-        $data = cart::where('user_id', '=', $userid)->get();
+        $data = Cart::where('user_id', '=', $userid)->get();
 
         foreach ($data as $data) {
-            $order = new order;
+            $order = new Order;
+
+            // Generate a unique ID for the order
+            do {
+                $order_id = random_int(1, PHP_INT_MAX);
+            } while (Order::find($order_id) !== null);
+
+            $order->id = $order_id; // Assign the unique ID to the order
 
             $order->name = $data->name;
             $order->email = $data->email;
@@ -164,8 +170,9 @@ class HomeController extends Controller
             $cart->delete();
         }
 
-        return redirect()->back()->with('message', 'We Received Your Order. We Going to Contact you ASAP');
+        return redirect()->back()->with('message', 'We Received Your Order. We Going to Contact you as soon as possible!');
     }
+
 
     public function stripe($totalprice)
     {
@@ -194,6 +201,13 @@ class HomeController extends Controller
 
         foreach ($data as $data) {
             $order = new order;
+
+            // Generate a unique ID for the order
+            do {
+                $order_id = random_int(1, PHP_INT_MAX);
+            } while (Order::find($order_id) !== null);
+
+            $order->id = $order_id; // Assign the unique ID to the order
 
             $order->name = $data->name;
             $order->email = $data->email;
