@@ -278,6 +278,17 @@
     --border-radius: 5px; /* Border radius untuk elemen berbentuk kotak */
  }
 
+.heading_container.heading_center h2 {
+    font-size: 36px; 
+    color: #626262; 
+    padding: 20px 0; 
+}
+
+.heading_container.heading_center h2 span {
+    color: #626262; /* ganti warna */
+}
+
+
  .product_section {
     padding: 50px 0;
  }
@@ -314,7 +325,7 @@
  }
  
 
-/* order css */
+/* css untuk order page */
 body {
     font-family: Arial, sans-serif;
     background-color: #f8f9fa;

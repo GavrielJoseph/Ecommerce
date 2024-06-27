@@ -106,6 +106,8 @@
 /* === Import template variables === */
 /*-------------------------------------------------------------------*/
 /* === SCSS Compass Functions === */
+
+/* css bootstrap untuk halaman admin page */
 @-moz-keyframes flash {
   0% {
     opacity: 1; }
