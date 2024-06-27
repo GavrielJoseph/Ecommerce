@@ -17,7 +17,7 @@
                <h1>About Us</h1>
                <!-- deskripsi singkat tentang toko gilgal makmur -->
                <p>
-                  Welcome to HP Store! Our journey began with a passion for technology and a desire to provide the best products and services to our customers. We offer a wide range of HP products, from the latest laptops and desktops to accessories and peripherals. Our team is dedicated to ensuring you find exactly what you need, with exceptional customer service every step of the way.
+                  Toko Gilgal Makmur adalah sebuah toko yang berlokasi di pusat perbelanjaan Mangga Dua, Jakarta, yang terkenal sebagai salah satu destinasi utama untuk kebutuhan elektronik dan gadget. Toko ini menawarkan berbagai macam handphone dari berbagai merek ternama, mulai dari model terbaru hingga model populer dengan harga yang kompetitif. Selain itu, Toko Gilgal Makmur juga menyediakan berbagai aksesoris handphone seperti casing, screen protector, charger, earphone, dan berbagai perlengkapan lainnya. Dengan pelayanan yang ramah dan profesional, Toko Gilgal Makmur berkomitmen untuk memberikan pengalaman berbelanja yang memuaskan bagi setiap pelanggan.
                </p>
             </div>
          </div>
