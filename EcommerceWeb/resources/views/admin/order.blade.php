@@ -19,7 +19,7 @@
             <h1 class="page-title">All Orders</h1>
 
             <!-- untuk search form -->
-            <div class="search-form">
+            <div class="search-forms">
                 <form action="{{url('search')}}" method="get">
                     @csrf
                     <input type="text" class="search-input-field" name="search" placeholder="Search Here">
@@ -28,21 +28,21 @@
             </div>
 
             <!-- button sort by delivery status -->
-            <div class="search-form">
+            <div class="search-forms">
                 <form action="{{url('sort')}}" method="get">
                     <input type="submit" value="Sort by Delivery Status" class="sort-status-button">
                 </form>
             </div>
 
             <!-- button sort by name -->
-            <div class="search-form">
+            <div class="search-forms">
                 <form action="{{ route('admin.sortByName') }}" method="get">
                     <input type="submit" value="Sort by Name" class="sort-name-button">
                 </form>
             </div>
 
             <!-- filter by delivery status -->
-            <div class="search-form">
+            <div class="search-forms">
                 <form action="{{ route('admin.filterByDeliveryStatus') }}" method="get">
                     <select name="delivery_status" class="filter-select-field">
                         <option value="">Show All</option>

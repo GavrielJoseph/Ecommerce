@@ -1,4 +1,15 @@
-/* update product css page */
+/* css untuk logo gilgal makmur di admin page */
+.logo-img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100px;
+    display: block;
+    margin: 0 auto;
+}
+
+
+/* css untuk halaman update product */
 body {
     background-color: #f4f4f4;
     color: #333;
@@ -70,7 +81,7 @@ input[type="file"] {
     border-radius: 8px;
 }
 
-/* show product css page */
+/* css untuk halaman show products */
 .admin_show_product_center {
     margin: auto;
     width: 80%;
@@ -203,7 +214,7 @@ input[type="file"] {
     }
 }
 
-/* product page css */
+/* css untuk product page */
 body {
     background-color: #f4f4f4;
     color: #333;
@@ -275,7 +286,7 @@ img {
     border-radius: 8px;
 }
 
-/* order page css */
+/* css untuk order page */
 .order-container {
     margin: auto;
     width: 80%;
@@ -414,9 +425,14 @@ img {
     cursor: pointer;
 }
 
-.search-form {
+.search-forms {
     padding-left: 400px; 
     padding-bottom: 30px;
+    
+}
+
+.filter-select-field {
+    width: 200px;
 }
 
 .search-input {
@@ -493,7 +509,7 @@ img {
     background-color: #e6e6e6;
 }
 
-/* email page css */
+/* css untuk email page */
 .email-form-container {
     display: flex;
     flex-direction: column;
@@ -560,7 +576,7 @@ img {
     }
 }
 
-/* category page css */
+/* css untuk halaman category page */
 body {
     background-color: #000;
     color: #fff;

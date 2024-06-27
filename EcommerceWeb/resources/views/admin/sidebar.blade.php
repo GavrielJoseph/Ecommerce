@@ -1,10 +1,10 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
         <a class="sidebar-brand brand-logo" href="{{ url('index') }}">
-            <img class="logo-img" src="{{ asset('admin/assets/images/GM.png') }}" alt="logo" />
+            <img class="logo-img" src="{{ asset('admin/assets/images/GM.png') }}" alt="logo" style="width: auto; height: 100px;" />
         </a>
         <a class="sidebar-brand brand-logo-mini" href="{{ url('index') }}">
-            <img class="logo-img" src="{{ asset('admin/assets/images/GM.png') }}" alt="logo" />
+            <img class="logo-img" src="{{ asset('admin/assets/images/GM.png') }}" alt="logo" style="width: auto; height: 100px;" />
         </a>
     </div>
     <ul class="nav">
