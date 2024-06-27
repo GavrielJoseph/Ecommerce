@@ -10,7 +10,7 @@
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <link rel="shortcut icon" href="images/favicon.png" type="">
+    <link rel="shortcut icon" href="{{ asset('admin/assets/images/GM.png') }}" type="image/png">
     <title>GM</title>
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="home/css/bootstrap.css" />
@@ -20,40 +20,32 @@
     <link href="home/css/style.css" rel="stylesheet" />
     <!-- responsive style -->
     <link href="home/css/responsive.css" rel="stylesheet" />
-
-    
 </head>
 <body>
     <div class="hero_area">
         <!-- header section strats -->
         @include('home.header')
         <!-- end header section -->
-        <!-- slider section -->
+        <!-- about section -->
         @include('home.slider')
-        <!-- end slider section -->
-    <!-- why section -->
-    <!-- end why section -->
-    <!-- arrival section -->
-    <!-- end arrival section -->
-    <!-- product section -->
-    @include('home.product')
-    <!-- end product section -->
+        <!-- end about section -->
+       
+        <!-- product section -->
+        @include('home.product')
+        <!-- end product section -->
 
-    <!-- Comment and reply -->
-    
-
-    <!-- subscribe section -->
-    @include('home.comment')
-    <!-- end subscribe section -->
-    <br>
-    <!-- client section -->
-    <!-- end client section -->
-    <!-- footer start -->
-    @include('home.footer')
-    <!-- footer end -->
-    <div class="cpy_">
-        <p class="mx-auto">© 2024 Kelompok 12<a href="https://html.design/"></a><br>
-        </p>
+        <!-- Comment and reply -->
+        <!-- discussion section -->
+        @include('home.comment')
+        <!-- end discussion section -->
+        <br>
+        <!-- footer start -->
+        @include('home.footer')
+        <!-- footer end -->
+        <div class="cpy_">
+            <p class="mx-auto">© 2024 Kelompok 12<a href="https://html.design/"></a><br>
+            </p>
+        </div>
     </div>
 
     <!-- jQery -->
