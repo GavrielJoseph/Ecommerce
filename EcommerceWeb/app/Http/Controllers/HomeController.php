@@ -16,7 +16,7 @@ use Stripe;
 
 class HomeController extends Controller
 {
-
+    // Menampilkan halaman utama, produk, komentar, dan balasan
     public function index()
     {
         $product = Product::paginate(6);
@@ -25,6 +25,7 @@ class HomeController extends Controller
         return view('home.userpage', compact('product', 'comment', 'reply'));
     }
 
+    // Mengarahkan admin ke halaman admin
     public function redirect()
     {
         $usertype = Auth::user()->usertype;
@@ -61,6 +62,7 @@ class HomeController extends Controller
         }
     }
 
+    // Menampilkan detail produk berdasarkan ID
     public function product_details($id)
     {
         $product = product::find($id);
@@ -68,6 +70,7 @@ class HomeController extends Controller
         return view('home.product_details', compact('product'));
     }
 
+    // Menambahkan produk ke cart
     public function add_cart(Request $request, $id)
     {
         if (Auth::id()) {
@@ -108,7 +111,7 @@ class HomeController extends Controller
         }
     }
 
-
+    // Menampilkan cart page ke customer
     public function show_cart()
     {
         if (Auth::id()) {
@@ -122,6 +125,7 @@ class HomeController extends Controller
         }
     }
 
+    // Menghapus produk dari cart berdasarkan ID
     public function remove_cart($id)
     {
         $cart = cart::find($id);
@@ -131,6 +135,7 @@ class HomeController extends Controller
         return redirect()->back();
     }
 
+    // Memproses pesanan dengan metode pembayaran COD/TRANSFER
     public function cash_order()
     {
         $user = Auth::user();
@@ -173,7 +178,7 @@ class HomeController extends Controller
         return redirect()->back()->with('message', 'We Received Your Order. We Going to Contact you as soon as possible!');
     }
 
-
+    // Menampilkan halaman Stripe untuk pembayaran
     public function stripe($totalprice)
     {
 
@@ -181,6 +186,7 @@ class HomeController extends Controller
         return view('home.stripe', compact('totalprice'));
     }
 
+    // Memproses pembayaran dengan Stripe
     public function stripePost(Request $request, $totalprice)
     {
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
@@ -236,6 +242,7 @@ class HomeController extends Controller
         return back();
     }
 
+    // Menampilkan pesanan customer
     public function show_order()
     {
         if (Auth::id()) {
@@ -256,6 +263,7 @@ class HomeController extends Controller
         }
     }
 
+    // Membatalkan pesanan berdasarkan ID
     public function cancel_order($id)
     {
         $order = order::find($id);
@@ -267,6 +275,7 @@ class HomeController extends Controller
         return redirect()->back();
     }
 
+    // Menghapus order berdasarkan ID
     public function delete_order($id)
     {
         $order = Order::find($id);
@@ -283,6 +292,7 @@ class HomeController extends Controller
         return redirect()->back()->with('message', 'Order Deleted Successfully.');
     }
 
+    // Menambahkan komentar customer ke discussion
     public function add_comment(Request $request)
     {
         if (Auth::id()) {
@@ -311,7 +321,7 @@ class HomeController extends Controller
         }
     }
 
-
+    // Menambahkan balasan untuk komentar
     public function add_reply(Request $request)
     {
         if (Auth::id()) {
@@ -339,7 +349,7 @@ class HomeController extends Controller
         }
     }
 
-
+    // Menyukai komen
     public function likeComment(Request $request)
     {
         $commentId = $request->commentId;
@@ -369,7 +379,7 @@ class HomeController extends Controller
         return response()->json(['success' => false]);
     }
 
-
+    // Menghapus komentar pengguna
     public function deleteComment(Request $request)
     {
         $comment = Comment::find($request->commentId);
@@ -380,6 +390,7 @@ class HomeController extends Controller
         return response()->json(['success' => false], 403);
     }
 
+    // Bisa mencari produk berdasarkan nama atau kategori
     public function search_product(Request $request)
     {
         $comment = comment::orderby('id', 'desc')->get();
