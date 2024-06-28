@@ -1,6 +1,6 @@
 # Gilgal Makmur - Website Jual Beli Handphone dan Accessories 
 
-## Kelompok 12 TI A 
+## Kelompok 12
 
 - Marcia Yanprincessa Utama (535220044)
 - Gavriel Joseph Lim (535220049)
@@ -19,7 +19,7 @@ Gilgal Makmur merupakan toko jual beli handphone dan accessories yang berlokasi 
 ### Eksekusi 
 1. Clone repositori ini:
    ```bash
-   git clone https://github.com/GavrielJosept/Ecommerce.git
+   git clone https://github.com/GavrielJoseph/Ecommerce.git
 2. Masuk ke direktori proyek:
    ```bash
    cd EcommerceWeb
@@ -34,7 +34,7 @@ Gilgal Makmur merupakan toko jual beli handphone dan accessories yang berlokasi 
     DB_DATABASE=nama_database_anda
     DB_USERNAME=nama_pengguna_anda
     DB_PASSWORD=password_anda
-5. Buat database PostgreSQL sesuai dengan nama database yang ada di file .env.
+5. Buat database dan password PostgreSQL sesuai dengan nama database yang ada di file .env.
 6. Instal dependensi PHP dengan Composer:
    ```bash
    composer install
@@ -50,8 +50,9 @@ Gilgal Makmur merupakan toko jual beli handphone dan accessories yang berlokasi 
 
 ### Menjalankan Aplikasi 
 Jalankan dua perintah berikut di terminal yang berbeda untuk memulai aplikasi:
-1. Menjalankan build proses front-end:
+1. Menjalankan npm run dev di terminal baru:
    ```bash
+   cd EcommerceWeb (di terminal baru lalu)
    npm run dev
 2. Menjalankan server aplikasi Laravel:
    ```bash
