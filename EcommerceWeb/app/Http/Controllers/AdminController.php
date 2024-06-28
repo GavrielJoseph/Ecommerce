@@ -12,6 +12,7 @@ use App\Notifications\EmailNotification;
 
 class AdminController extends Controller
 {
+    // Menampilkan semua kategori di admin page
     public function category()
     {
         $data=category::all();
@@ -19,6 +20,7 @@ class AdminController extends Controller
         return view('admin.category',compact('data'));
     }
 
+    // Untuk Menambahkan kategori baru
     public function add_category(Request $request)
     {
         $data = new Category;
@@ -37,7 +39,7 @@ class AdminController extends Controller
         return redirect()->back()->with('message', 'Category Added Successfully');
     }
 
-
+    // Menghapus kategori berdasarkan ID
     public function delete_category($id)
     {
         $data=category::find($id);
@@ -47,12 +49,14 @@ class AdminController extends Controller
         return redirect()->back()->with('message','Category Deleted');
     }
 
+    // Menampilkan halaman untuk melihat produk dengan kategori
     public function view_product()
     {
         $category=category::all();
         return view('admin.product',compact('category'));
     }
 
+    // Untuk Menambahkan produk baru
     public function add_product(Request $request)
     {
         $product = new Product;
@@ -83,7 +87,7 @@ class AdminController extends Controller
         return redirect()->back()->with('message', 'Product Added Successfully');
     }
 
-
+    // Menampilkan semua produk yang di tambahkan
     public function show_product()
     {
         $product=product::all();
@@ -92,6 +96,7 @@ class AdminController extends Controller
         return view('admin.show_product',compact('product'));
     }
 
+    // Menghapus produk berdasarkan ID
     public function delete_product($id)
     {
         $product=product::find($id);
@@ -101,6 +106,7 @@ class AdminController extends Controller
         return redirect()->back()->with('message','Product Deleted Successfully');
     }
 
+    // Menghapus pesanan berdasarkan ID
     public function deleteOrder($id)
     {
         $order = Order::find($id);
@@ -114,7 +120,7 @@ class AdminController extends Controller
         return redirect()->back()->with('message', 'Order deleted successfully.');
     }
 
-
+    // Menampilkan form untuk memperbarui produk berdasarkan ID
     public function update_product($id)
     {
         $product=product::find($id);
@@ -124,6 +130,7 @@ class AdminController extends Controller
         return view('admin.update_product',compact('product','category'));
     }
 
+    // Untuk mengonfirmasi pembaruan produk berdasarkan ID
     public function update_product_confirm(Request $request,$id)
     {
         $product=product::find($id);
@@ -147,6 +154,7 @@ class AdminController extends Controller
         return redirect()->back()->with('message','Product updated successfully');
     }
 
+    // Menampilkan semua order
     public function order()
     {
         $order=order::all();
@@ -155,6 +163,7 @@ class AdminController extends Controller
         return view('admin.order',compact('order'));
     }
 
+    // Mengubah status pesanan menjadi 'delivered' berdasarkan ID
     public function delivered($id)
     {
         $order = Order::find($id);
@@ -180,6 +189,7 @@ class AdminController extends Controller
         return redirect()->back()->with('message', 'Order status updated to delivered.');
     }
 
+    // Mendownload file PDF untuk detail pesanan berdasarkan ID
     public function print($id)
     {
         $order=order::find($id);
@@ -189,6 +199,7 @@ class AdminController extends Controller
         return $pdf->download('order_details.pdf');
     }
 
+    // Menampilkan halaman untuk mengirim email kepada pengguna berdasarkan ID
     public function email($id)
     {
         $order=order::find($id);
@@ -196,6 +207,7 @@ class AdminController extends Controller
         return view('admin.email',compact('order'));
     }
 
+    // Mengirim email kepada pengguna berdasarkan ID pesanan
     public function send_user_email(Request $request,$id)
     {
 
@@ -218,6 +230,7 @@ class AdminController extends Controller
 
     }
 
+    // Mencari data pesanan berdasarkan kata kunci
     public function searchdata(Request $request)
     {
 
@@ -229,6 +242,7 @@ class AdminController extends Controller
 
     }
 
+    // Mengurutkan pesanan berdasarkan status pengiriman dan nama
     public function sortOrders()
     {
         // Custom sorting logic
@@ -243,6 +257,7 @@ class AdminController extends Controller
     }
 
 
+    // Mengurutkan pesanan berdasarkan nama
     public function sortByName()
     {
         $order = Order::orderBy('name')->get();
@@ -250,6 +265,7 @@ class AdminController extends Controller
         return view('admin.order', compact('order'));
     }
 
+    // Memfilter pesanan berdasarkan status pengiriman
     public function filterByDeliveryStatus(Request $request)
 {
     // Validasi request
